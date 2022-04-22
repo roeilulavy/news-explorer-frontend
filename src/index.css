@@ -1,2 +1,6 @@
 @import url('./vendor/normalize.css');
 @import url('./fonts/fonts.css');
+
+*{
+  border: solid 1px red;
+}
