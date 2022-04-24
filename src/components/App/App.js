@@ -1,12 +1,15 @@
 import './App.css';
-import { Navigation } from '../Navigation/Navigation';
+import { Header } from '../Header/Header';
+import { Main } from '../Main/Main';
+import { About } from '../About/About';
 import { Footer } from '../Footer/Footer';
 
 function App() {
   return (
     <div className="App">
-      <Navigation />
-      
+      <Header />
+      <Main />
+      <About />
       <Footer />
     </div>
   );

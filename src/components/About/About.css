@@ -1,0 +1,40 @@
+.about {
+  display: flex;
+  flex-direction: row;
+  min-height: 624px;
+  justify-content: center;
+  align-items: center;
+  background-color: white ;
+  gap: 56px;
+}
+
+.about__image{
+  max-width: 464px;
+  max-height: 464px;
+}
+
+.about__text-wrapper{
+  align-self: flex-start;
+  max-width: 600px;
+  margin-top: 131px;
+}
+
+.about__title{
+  font-family: 'Roboto-slab',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 46px;
+  color: #1A1B22;
+  margin: 0;
+}
+
+.about__text{
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: #1A1B22;
+  margin: 24px 0 0;
+}
