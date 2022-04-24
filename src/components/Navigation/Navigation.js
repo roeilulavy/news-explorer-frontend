@@ -6,9 +6,7 @@ export function Navigation ({ isLoggedIn }) {
 
   return (
     <nav className='navigation'>
-
       <h1 className='navigation__title'>NewsExplorer</h1>
-
       <ul className='navigation__list'>
         <li className='navigation__link'>
           Home
