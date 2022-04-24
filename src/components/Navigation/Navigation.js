@@ -1,8 +1,8 @@
-import { useNavigate } from 'react-router';
+// import { useNavigate } from 'react-router';
 import './Navigation.css';
 
 export function Navigation ({ isLoggedIn }) {
-  const navigation = useNavigate()
+  // const navigation = useNavigate()
 
   return (
     <nav className='navigation'>
