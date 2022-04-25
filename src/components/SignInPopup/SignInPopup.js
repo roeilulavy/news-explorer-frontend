@@ -1,31 +1,43 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { PopupWithForm } from "../PopupWithForm/PopupWithForm";
+import './SignInPopup.css';
 
-export function SignInPopup (props) {
+export function SignInPopup({ isOpen, onClose, onSignInPopup }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   React.useEffect(() => {
-    setEmail('');
-    setPassword('');
-  }, [])
+    setEmail("");
+    setPassword("");
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email || !password) {
       return;
     }
-    props.onSignInPopup(email, password);
-  }
+    onSignInPopup(email, password);
+  };
 
   return (
-    <div className="signInPopup">
-      <p className="signInPopup__header">Sign in</p>
-      <form onSubmit={handleSubmit} className="signInPopup__form">
-        <p>Email</p>
+    <PopupWithForm
+      isOpen={isOpen}
+      onClose={onClose}
+      name="sign-in"
+      title="Sign in"
+      buttonText="sign in"
+      onSubmit={handleSubmit}
+      link="/signup"
+      linkText="Sign in"
+    >
+
+      <div className="popup__input-section">
+        <label className='popup__label' htmlFor='email'>Email</label>
+
         <input
-          className="signInPopup__input"
+          className="popup__input"
           required
+          autoComplete="email"
           id="email"
           name="email"
           type="email"
@@ -33,9 +45,15 @@ export function SignInPopup (props) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <p>Password</p>
+
+        <span id="input_type_name-error" className="popup__error">Invalid email address</span>
+      </div>
+
+      <div className="popup__input-section">
+        <label className='popup__label' htmlFor='password'>password</label>
+
         <input
-          className="signInPopup__input"
+          className="popup__input"
           required
           id="password"
           name="password"
@@ -44,19 +62,9 @@ export function SignInPopup (props) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button
-          type="submit"
-          className="signInPopup__button"
-        >
-          Sign in
-        </button>
-      </form>
-      <p className="signInPopup__signup">
-        or{" "}
-        <Link to="/signup" className="signInPopup__link">
-          Sign up
-        </Link>
-      </p>
-    </div>
+
+        <span id="input_type_description-error" className="popup__error" />
+      </div>
+    </PopupWithForm>
   );
 }
