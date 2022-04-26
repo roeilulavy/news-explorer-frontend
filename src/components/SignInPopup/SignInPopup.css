@@ -1,42 +1,40 @@
-.popup__input-section {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 16px;
-}
-
-.popup__label{
+.popup__label {
   font-family: 'Inter',sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
   color: #2F71E5;
-  margin: 0 0 9px;
+  margin: 0 0 8px;
 }
 
-.popup__input{
+.popup__input {
   font-family: 'Inter', Arial, sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
   text-align: left;
+  outline: none;
   border-style: none;
   border-bottom: solid 1px rgba(0, 0, 0, 0.2);
-  outline: none;
-  padding-bottom: 4px;
-  margin-bottom: 15px;
+  padding-bottom: 6px;
+  margin-bottom: 31px;
+}
+
+.popup__input::placeholder {
+  opacity: 0.2;
 }
 
 .popup__input_type_error {
   border-bottom-color:red;
 }
 
-.popup__error{
+.popup__error {
   visibility: hidden;
   display: none;
 }
 
-.popup__error_visible{
+.popup__error_visible {
   visibility: visible;
   display: flex;
   font-family: 'Inter', Arial, sans-serif;
@@ -45,6 +43,7 @@
   font-size: 12px;
   line-height: 15px;
   color: #FF0000;
-  margin: 3px 0;
+  margin-top: -25px;
+  margin-bottom: 10px;
   padding: 0;
 }

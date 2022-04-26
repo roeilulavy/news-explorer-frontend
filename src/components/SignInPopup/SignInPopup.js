@@ -25,13 +25,12 @@ export function SignInPopup({ isOpen, onClose, onSignInPopup }) {
       onClose={onClose}
       name="sign-in"
       title="Sign in"
-      buttonText="sign in"
+      buttonText="Sign in"
       onSubmit={handleSubmit}
       link="/signup"
-      linkText="Sign in"
+      linkText="Sign up"
     >
 
-      <div className="popup__input-section">
         <label className='popup__label' htmlFor='email'>Email</label>
 
         <input
@@ -47,9 +46,8 @@ export function SignInPopup({ isOpen, onClose, onSignInPopup }) {
         />
 
         <span id="input_type_name-error" className="popup__error">Invalid email address</span>
-      </div>
 
-      <div className="popup__input-section">
+
         <label className='popup__label' htmlFor='password'>password</label>
 
         <input
@@ -63,8 +61,6 @@ export function SignInPopup({ isOpen, onClose, onSignInPopup }) {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <span id="input_type_description-error" className="popup__error" />
-      </div>
     </PopupWithForm>
   );
 }
