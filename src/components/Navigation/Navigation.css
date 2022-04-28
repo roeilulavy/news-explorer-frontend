@@ -37,13 +37,19 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
+  color: #B6BCBF;
   height: 100%;
-  width: 68PX;
+  width: fit-content;
   background-color: transparent;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 20px;
+}
+
+.navigation__link_active {
+  color: #FFFFFF;
   border-bottom: solid 3px #FFFFFF;
 }
 
@@ -65,4 +71,24 @@
   align-items: center;
   padding: 11px 60px;
   transition: opacity .5s;
+}
+
+.navigation__button-user {
+  box-sizing: border-box;
+  background-color: transparent;
+  border-style: none;
+  border: 1px solid #FFFFFF;
+  color: white;
+  border-radius: 100px;
+  font-family: 'Roboto',sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity .5s;
+  padding: 12px 19px;
+  gap: 20px;
 }
