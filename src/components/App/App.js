@@ -7,6 +7,7 @@ import { About } from '../About/About';
 import { Footer } from '../Footer/Footer';
 import { SignInPopup } from '../SignInPopup/SignInPopup';
 import { NotFound } from '../NotFound/NotFound';
+import { PreLoader } from '../PreLoader/PreLoader';
 
 function App() {
 
