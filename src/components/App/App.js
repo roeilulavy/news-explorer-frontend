@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Header } from '../Header/Header';
 import { Main } from '../Main/Main';
-import { About } from '../About/About';
 import { Footer } from '../Footer/Footer';
 import { SignInPopup } from '../SignInPopup/SignInPopup';
 import { NotFound } from '../NotFound/NotFound';
@@ -17,6 +16,7 @@ function App() {
   const [isSaveArticlesPageOpen, setIsSaveArticlesPageOpen] = useState(false)
   const [isSignInPopup, setIsSignInPopup] = useState(false);
   const [isSignUpPopup, setIsSignUpPopup] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   React.useEffect(() => {
     const closeByEscape = (e) => {
@@ -34,10 +34,6 @@ function App() {
 
   function handleSigninPopup() {
     setIsSignInPopup(true)
-  }
-
-  function handleSignupPopup() {
-    setIsSignUpPopup(true)
   }
 
   function closeAllPopups() {
@@ -60,8 +56,10 @@ function App() {
           setIsSaveArticlesPageIsOpen={setIsSaveArticlesPageOpen}
           handleSigninPopup={handleSigninPopup}
           />
-          <Main />
-          <About />
+
+          <Main
+            isLoading={isLoading}
+          />
           
           <SignInPopup
             isOpen={isSignInPopup}
