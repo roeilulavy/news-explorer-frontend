@@ -1,14 +1,16 @@
 import './App.css';
 import React, { useState } from "react";
+import { useNavigate } from 'react-router';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Header } from '../Header/Header';
 import { Main } from '../Main/Main';
 import { Footer } from '../Footer/Footer';
 import { SignInPopup } from '../SignInPopup/SignInPopup';
-import { NotFound } from '../NotFound/NotFound';
-import { PreLoader } from '../PreLoader/PreLoader';
+import { testData } from '../../utils/testData';
 
 function App() {
+
+  const navigator = useNavigate();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
@@ -68,10 +70,12 @@ function App() {
         </>}
         />
 
-      <Route path='/saved-articles' element={<>
+        <Route path='/saved-articles' element={<>
               
             </>}
-            />
+        />
+
+        <Route path='*' element={<Navigate to='/' />} />
       </Routes>
       <Footer />
     </div>
