@@ -1,6 +1,7 @@
 import './Navigation.css';
-import LogoutIcon from '../../images/buttons/logout_icon_black.svg';
 import { useNavigate } from 'react-router';
+import LogoutIconWhite from '../../images/buttons/logout_icon_white.svg';
+import LogoutIconBlack from '../../images/buttons/logout_icon_black.svg';
 
 export function Navigation ({ isLoggedIn, onLogout, isBurgerMenuOpen, setIsBurgerMenuOpen, isHomePageOpen, setIsHomePageOpen, isSaveArticlesPageOpen, setIsSaveArticlesPageOpen, handleSigninPopup }) {
   const navigation = useNavigate()
@@ -35,7 +36,7 @@ export function Navigation ({ isLoggedIn, onLogout, isBurgerMenuOpen, setIsBurge
           </li>
           <li className='navigation__button-user' onClick={onLogout}>
             User
-            <img src={LogoutIcon} alt='Log out'/>
+            <img src={LogoutIconWhite} alt='Log out'/>
           </li>
         </>
          :

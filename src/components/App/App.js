@@ -7,6 +7,7 @@ import { Main } from '../Main/Main';
 import { Footer } from '../Footer/Footer';
 import { SignInPopup } from '../SignInPopup/SignInPopup';
 import { testData } from '../../utils/testData';
+import { SavedNews } from '../SavedNews/SavedNews';
 
 function App() {
 
@@ -14,7 +15,7 @@ function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false)
-  const [isHomePageOpen, setIsHomePageOpen] = useState(true)
+  const [isHomePageOpen, setIsHomePageOpen] = useState(false)
   const [isSaveArticlesPageOpen, setIsSaveArticlesPageOpen] = useState(false)
   const [isSignInPopup, setIsSignInPopup] = useState(false);
   const [isSignUpPopup, setIsSignUpPopup] = useState(false);
@@ -48,15 +49,15 @@ function App() {
       <Routes>
         <Route path='/' element={<>
           <Header
-          isLoggedIn={isLoggedIn}
-          onLogout={handleLogout}
-          isBurgerMenuOpen={isBurgerMenuOpen}
-          setIsBurgerMenuOpen={setIsBurgerMenuOpen}
-          isHomePageOpen={isHomePageOpen}
-          setIsHomePageOpen={setIsHomePageOpen}
-          isSaveArticlesPageIsOpen={isSaveArticlesPageOpen}
-          setIsSaveArticlesPageIsOpen={setIsSaveArticlesPageOpen}
-          handleSigninPopup={handleSigninPopup}
+            isLoggedIn={isLoggedIn}
+            onLogout={handleLogout}
+            isBurgerMenuOpen={isBurgerMenuOpen}
+            setIsBurgerMenuOpen={setIsBurgerMenuOpen}
+            isHomePageOpen={isHomePageOpen}
+            setIsHomePageOpen={setIsHomePageOpen}
+            isSaveArticlesPageIsOpen={isSaveArticlesPageOpen}
+            setIsSaveArticlesPageIsOpen={setIsSaveArticlesPageOpen}
+            handleSigninPopup={handleSigninPopup}
           />
 
           <Main
@@ -71,8 +72,9 @@ function App() {
         />
 
         <Route path='/saved-articles' element={<>
-              
-            </>}
+          <SavedNews />
+
+        </>}
         />
 
         <Route path='*' element={<Navigate to='/' />} />
