@@ -5,11 +5,11 @@ import { NotFound } from '../NotFound/NotFound';
 export function SavedNewsList({ savedCardsData, isSaveArticlesPageIsOpen, isHomePageOpen, isLoggedIn, isCardHover, setIsCardHover }) {
 
   return (
-    <section className='cards cards_type_saved-articles'>
+    <section className='savedNewsList'>
       {
         savedCardsData ?
           <>
-            <div className='cards__wrapper cards__wrapper_type_saved-articles'>
+            <div className='savedNewsList__wrapper'>
               {savedCardsData &&
                 savedCardsData.map((card) => {
                   return (

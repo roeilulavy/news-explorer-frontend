@@ -1,12 +1,67 @@
-.card{
+.card {
   max-width: 400px;
   background-color: white;
-  border-radius: 10px;
+  border-radius: 20px;
   cursor: pointer;
   position: relative;
 }
 
-.card__keyword{
+.card__image {
+  width: 100%;
+  border-radius: 20px 20px 0 0;
+}
+
+.card__content {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 17px 24px 24px;
+}
+
+.card__date {
+  margin:0;
+  font-family:'Source Sans Pro', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: #B6BCBF;
+}
+
+.card__title {
+  font-family: 'Roboto-Slab',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 30px;
+  color: #1A1B22;
+  margin: 15px 0 0;
+}
+
+.card__subtitle {
+  font-family: 'Roboto',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #1A1B22;
+  margin: 16px 0 0;
+}
+
+.card__caption {
+  font-family: 'Roboto-Slab',sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: #B6BCBF;
+  margin: 18px 0 0;
+}
+
+.card__keyword {
   position: absolute;
   top: 24px;
   left: 24px;
@@ -27,14 +82,14 @@
   color: #000000;
 }
 
-.card__button{
-  position: absolute;
+.card__button {
   height: 40px;
   width: 40px;
-  border-radius: 8px;
+  position: absolute;
   top: 24px;
   right: 24px;
   border: none;
+  border-radius: 8px;
   background-image: url('../../images/buttons/save_icon.svg') ;
   background-repeat: no-repeat;
   background-position: center;
@@ -42,7 +97,7 @@
   background-color: white;
 }
 
-.card__message{
+.card__message {
   position: absolute;
   padding: 13px 30px;
   top:24px;
@@ -58,64 +113,6 @@
   display: none;
 }
 
-.card__message_is-visible{
+.card__message_is-visible {
   display: block;
-}
-
-.card__text-wrapper{
-  display: flex;
-  flex-direction: column;
-  padding: 20px 24px;
-  box-sizing: border-box;
-  margin: 0;
-}
-
-.card__image{
-  width: 100%;
-  border-top-left-radius:  10px;
-  border-top-right-radius:  10px;
-}
-
-.card__date{
-  margin:0;
-  font-family:'Source Sans Pro', Arial, Helvetica, sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 24px;
-  color: #B6BCBF;
-}
-
-.card__title{
-  margin-top:12px;
-  font-family: 'Roboto Slab',sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 26px;
-  line-height: 30px;
-  color: #1A1B22;
-  margin-bottom: 0px;
-}
-
-.card__text{
-  margin-top:16px;
-  font-family: 'Roboto',sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 22px;
-  color: #1A1B22;
-  margin-bottom: 0px;
-}
-
-.card__caption{
-  margin-top: 18px;
-  font-family: 'Roboto Slab',sans-serif;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 20px;
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
-  color: #B6BCBF;
 }

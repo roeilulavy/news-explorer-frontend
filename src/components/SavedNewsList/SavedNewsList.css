@@ -1,0 +1,14 @@
+.savedNewsList {
+  background: #F5F6F7;
+  padding: 0 104px 0;
+}
+
+.savedNewsList__wrapper{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  grid-column-gap:16px;
+  grid-row-gap:16px;
+  flex-wrap: wrap;
+  padding: 62px 0;
+}

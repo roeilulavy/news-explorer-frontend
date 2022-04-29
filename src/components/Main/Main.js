@@ -1,14 +1,20 @@
-import './Main.css';
-import { About } from '../About/About'
-import { NewsCardList } from '../NewsCardList/NewsCardList';
+import "./Main.css";
+import { Header } from "../Header/Header";
+import { About } from "../About/About";
+import { NewsCardList } from "../NewsCardList/NewsCardList";
 
-export function Main({ isLoading }) {
+export function Main({ isLoggedIn, handleLogout, handleSigninPopup, isSearchResultOpen, isLoading }) {
   return (
     <main>
-      <NewsCardList
-       isLoading={isLoading}
+      <Header
+        isLoggedIn={isLoggedIn}
+        onLogout={handleLogout}
+        handleSigninPopup={handleSigninPopup}
       />
+
+      {isSearchResultOpen && <NewsCardList isLoading={isLoading} />}
+
       <About />
     </main>
-  )
+  );
 }

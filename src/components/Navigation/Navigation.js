@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import LogoutIconWhite from '../../images/buttons/logout_icon_white.svg';
 import LogoutIconBlack from '../../images/buttons/logout_icon_black.svg';
 
-export function Navigation ({ isLoggedIn, onLogout, isBurgerMenuOpen, setIsBurgerMenuOpen, isHomePageOpen, setIsHomePageOpen, isSaveArticlesPageOpen, setIsSaveArticlesPageOpen, handleSigninPopup }) {
+export function Navigation ({ isLoggedIn, onLogout, isHomePageOpen, setIsHomePageOpen, isSaveArticlesPageOpen, setIsSaveArticlesPageOpen, handleSigninPopup }) {
   const navigation = useNavigate()
 
   function handleHomeBtn() {
@@ -16,10 +16,6 @@ export function Navigation ({ isLoggedIn, onLogout, isBurgerMenuOpen, setIsBurge
     setIsHomePageOpen(false);
     setIsSaveArticlesPageOpen(true);
     navigation('/saved-articles');
-  }
-
-  function handleBurgerMenu() {
-    setIsBurgerMenuOpen(!isBurgerMenuOpen);
   }
 
   return (
