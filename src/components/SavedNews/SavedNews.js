@@ -1,25 +1,19 @@
 import './SavedNews.css';
 import { SavedNewsHeader } from '../SavedNewsHeader/SavedNewsHeader';
-import { SavedNewsList } from '../SavedNewsList/SavedNewsList';
+import { NewsCardList } from '../NewsCardList/NewsCardList';
 
-export function SavedNews({ savedCardsData, isLoggedIn, onClick, setIsHomePageOpen, isHomePageOpen, isSaveArticlesPageIsOpen, setIsSaveArticlesPageIsOpen, setIsBurgerMenuOpen, isBurgerMenuOpen }) {
+export function SavedNews({ isLoggedIn, openPage, setOpenPage, savedCardsData }) {
 
   return (
     <div className='savednews'>
       <SavedNewsHeader
         isLoggedIn={isLoggedIn}
-        onClick={onClick}
-        isBurgerMenuOpen={isBurgerMenuOpen}
-        setIsBurgerMenuOpen={setIsBurgerMenuOpen}
-        isHomePageOpen={isHomePageOpen}
-        setIsHomePageOpen={setIsHomePageOpen}
-        isSaveArticlesPageIsOpen={isSaveArticlesPageIsOpen}
-        setIsSaveArticlesPageIsOpen={setIsSaveArticlesPageIsOpen}
+        openPage={openPage}
+        setOpenPage={setOpenPage}
       />
-      <SavedNewsList
-        isSaveArticlesPageIsOpen={isSaveArticlesPageIsOpen}
+
+      <NewsCardList
         savedCardsData={savedCardsData}
-        isHomePageOpen={isHomePageOpen}
         isLoggedIn={isLoggedIn}
       />
 

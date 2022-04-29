@@ -24,8 +24,9 @@ export function NewsCardList({ isLoading, cardsData, allCardsData, showMore }) {
                       cardImg={card.img}
                       cardDate={card.date}
                       cardTitle={card.title}
-                      cardText={card.subtitle}
+                      cardSubtitle={card.subtitle}
                       cardCaption={card.caption}
+                      cardKeyWord={card.keyword}
                       />
                     )
                   })

@@ -7,10 +7,8 @@ import { SavedNews } from "../SavedNews/SavedNews";
 import { Footer } from "../Footer/Footer";
 import { SignInPopup } from "../SignInPopup/SignInPopup";
 import { testData } from "../../utils/testData";
-import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 import * as auth from "../../utils/auth";
 import api from "../../utils/api";
-import CurrentUserContext from "../../context/CurrentUserContext";
 
 function App() {
   const [success, setSuccess] = useState(false);
@@ -22,8 +20,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
 
-  const [isHomePageOpen, setIsHomePageOpen] = useState(false);
-  const [isSaveArticlesPageOpen, setIsSaveArticlesPageOpen] = useState(false);
+  const [openPage, setOpenPage] = useState('');
   const [isSearchResultOpen, setIsSearchResultOpen] = useState(false);
 
   const [isInfoTolltipOpen, setIsInfoTolltipPopup] = useState(false);
@@ -36,61 +33,15 @@ function App() {
 
   const navigator = useNavigate();
 
-  const onRegister = (email, password, name) => {
-    auth
-      .signup(email, password, name)
-      .then(() => {
-        setSuccess(true);
-        setMessage("Registration successfully completed!");
-      })
-      .catch((err) => {
-        console.error(err);
-        setSuccess(false);
-        setMessage("Oops, something went wrong! Please try again.");
-      });
-    setIsInfoTolltipPopup(true);
-  };
-
   const onLogin = (email, password) => {
-    auth
-      .signin(email, password)
-      .then((data) => {
-        if (data) {
-          const userData = {
-            email: email,
-            token: data,
-          };
-
-          setUserData(userData);
-          setIsLoggedIn(true);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        setSuccess(false);
-        setMessage("Oops, something went wrong! Please try again.");
-        setIsInfoTolltipPopup(true);
-      });
+    setIsLoggedIn(true)
   };
 
   const onLogout = () => {
-    localStorage.removeItem("jwt");
-    setUserData({});
-    setCurrentUser({});
     setIsLoggedIn(false);
+    setOpenPage('Home')
+    navigator('/')
   };
-
-  React.useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
-    if(jwt) {
-      auth.checkToken(jwt).then((res) => {
-        if (res){
-            setUserData(res);
-            setIsLoggedIn(true);
-        }
-      }).catch((err) => console.error(err));
-    }
-  }, []);
 
   React.useEffect(() => {
     const closeByEscape = (e) => {
@@ -106,8 +57,6 @@ function App() {
     setIsSearchResultOpen(false);
   }, []);
 
-  function handleLogout() {}
-
   function handleSigninPopup() {
     setIsSignInPopup(true);
   }
@@ -118,15 +67,18 @@ function App() {
   }
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
         <Routes>
           <Route path="/" element={
               <>
                 <Main
+                  openPage={openPage}
+                  setOpenPage={setOpenPage}
                   isLoggedIn={isLoggedIn}
                   isLoading={isLoading}
                   isSearchResultOpen={isSearchResultOpen}
+                  handleLogout={onLogout}
+                  handleSigninPopup={handleSigninPopup}
                 />
 
                 <SignInPopup
@@ -138,11 +90,12 @@ function App() {
           />
 
           <Route path="/saved-articles" element={
-            <ProtectedRoute
-              component={SavedNews}
-              isLoggedIn={isLoggedIn}
-              savedCardsData={savedCardsData}
-            />
+              <SavedNews 
+                isLoggedIn={isLoggedIn}
+                openPage={openPage}
+                setOpenPage={setOpenPage}
+                savedCardsData={savedCardsData}
+              />
             }
           />
 
@@ -150,7 +103,6 @@ function App() {
         </Routes>
         <Footer />
       </div>
-    </CurrentUserContext.Provider>
   );
 }
 

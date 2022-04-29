@@ -3,12 +3,14 @@ import { Header } from "../Header/Header";
 import { About } from "../About/About";
 import { NewsCardList } from "../NewsCardList/NewsCardList";
 
-export function Main({ isLoggedIn, handleLogout, handleSigninPopup, isSearchResultOpen, isLoading }) {
+export function Main({ isLoggedIn, openPage, setOpenPage, handleLogout, handleSigninPopup, isSearchResultOpen, isLoading }) {
   return (
     <main>
       <Header
         isLoggedIn={isLoggedIn}
-        onLogout={handleLogout}
+        openPage={openPage}
+        setOpenPage={setOpenPage}
+        handleLogout={handleLogout}
         handleSigninPopup={handleSigninPopup}
       />
 
