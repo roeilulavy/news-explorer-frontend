@@ -19,8 +19,9 @@ export function SavedNews({ isLoggedIn, handleLogout, openPage, setOpenPage, sav
       />
 
       <NewsCardList
-        savedCardsData={savedCardsData}
         isLoggedIn={isLoggedIn}
+        savedCardsData={savedCardsData}
+        text={''}
       />
 
     </div>

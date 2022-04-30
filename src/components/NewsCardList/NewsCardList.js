@@ -3,7 +3,7 @@ import { PreLoader } from '../PreLoader/PreLoader'
 import { NewsCard } from '../NewsCard/NewsCard'
 import { NotFound } from '../NotFound/NotFound'
 
-export function NewsCardList({ isLoading, cardsData, allCardsData, showMore }) {
+export function NewsCardList({ isLoading, cardsData, allCardsData, text, showMore }) {
 
   return (
     <section className='cards'>
@@ -38,7 +38,7 @@ export function NewsCardList({ isLoading, cardsData, allCardsData, showMore }) {
               }
             </>
             : <NotFound
-                text={'Sorry, but nothing matched your search terms.'}
+                text={text}
               />
       }
     </section>

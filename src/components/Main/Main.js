@@ -21,7 +21,7 @@ export function Main({ isLoggedIn, handleLogout, openPage, setOpenPage, onSearch
         onSearch={onSearch}
       />
 
-      {isSearchResultOpen && <NewsCardList isLoading={isLoading} />}
+      {isSearchResultOpen && <NewsCardList isLoading={isLoading} text={'Sorry, but nothing matched your search terms.'} />}
 
       <About />
     </main>
