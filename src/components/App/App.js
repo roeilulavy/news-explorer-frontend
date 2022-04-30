@@ -6,15 +6,13 @@ import { Main } from "../Main/Main";
 import { SavedNews } from "../SavedNews/SavedNews";
 import { Footer } from "../Footer/Footer";
 import { SignInPopup } from "../SignInPopup/SignInPopup";
-import { testData } from "../../utils/testData";
-import * as auth from "../../utils/auth";
-import api from "../../utils/api";
 import { SignUpPopup } from "../SignUpPopup/SignUpPopup";
 import { SuccessPopup } from "../SuccessPopup/SuccessPopup";
+import { FailurePopup } from "../FailurePopup/FailurePopup";
+import { testData } from "../../utils/testData";
 
 function App() {
   const [success, setSuccess] = useState(false);
-  const [message, setMessage] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
   const token = localStorage.getItem("jwt");
@@ -25,10 +23,10 @@ function App() {
   const [openPage, setOpenPage] = useState('');
   const [isSearchResultOpen, setIsSearchResultOpen] = useState(false);
 
-  const [isInfoTolltipOpen, setIsInfoTolltipPopup] = useState(false);
   const [isSignInPopup, setIsSignInPopup] = useState(false);
   const [isSignUpPopup, setIsSignUpPopup] = useState(false);
   const [isSuccessPopup, setIsSuccessPopup] = useState(false);
+  const [isFailurePopup, setIsFailurePopup] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const [savedCardsData, setSavedCardsData] = useState(testData)
@@ -67,6 +65,15 @@ function App() {
     setIsSearchResultOpen(false);
   }, []);
 
+  function handleSearch() {
+    setIsLoading(true);
+    setIsSearchResultOpen(true);
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1500)
+  }
+
   function handleSigninPopup() {
     closeAllPopups();
     setIsSignInPopup(true);
@@ -81,6 +88,7 @@ function App() {
     setIsSignInPopup(false);
     setIsSignUpPopup(false);
     setIsSuccessPopup(false);
+    setIsFailurePopup(false);
   }
 
   return (
@@ -93,6 +101,7 @@ function App() {
                   handleLogout={onLogout}
                   openPage={openPage}
                   setOpenPage={setOpenPage}
+                  onSearch={handleSearch}
                   isLoading={isLoading}
                   isSearchResultOpen={isSearchResultOpen}
                   handleSigninPopup={handleSigninPopup}
@@ -116,6 +125,11 @@ function App() {
                   isOpen={isSuccessPopup}
                   onClose={closeAllPopups}
                   handleSigninPopup={handleSigninPopup}
+                />
+
+                <FailurePopup 
+                  isOpen={isFailurePopup}
+                  onClose={closeAllPopups}
                 />
               </>
             }
