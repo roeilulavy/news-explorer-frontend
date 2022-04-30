@@ -6,6 +6,8 @@ export function PopupWithForm(props) {
       <div className="popup__content">
         <button type="button" className="popup__close" onClick={props.onClose}></button>
         <h3 className="popup__title">{props.title}</h3>
+
+        {props.name !== 'SuccessPopup' ? 
         <form className="popup__form" name={props.name} onSubmit={props.onSubmit}>
             {props.children}
             <button type="submit" className="popup__submit">{props.buttonText}</button>
@@ -16,6 +18,14 @@ export function PopupWithForm(props) {
               </span>
             </span>
         </form>
+        :
+        <div className="popup__only-span">
+          <span className="popup__only-span" onClick={props.handlePopup}>
+            {props.linkText}
+          </span>
+        </div>
+        }
+        
       </div>
     </div>
   );

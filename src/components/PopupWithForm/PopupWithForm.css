@@ -108,7 +108,17 @@
 .popup__span-link {
   color: #2F71E5;
   text-decoration: none;
-  border: none;
-  background-color: transparent;
   cursor: pointer;
+}
+
+.popup__only-span {
+  width: fit-content;
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #2F71E5;
+  text-decoration: none;
+  cursor: pointer;
+  margin: 14px 0 23px;
 }

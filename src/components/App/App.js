@@ -10,6 +10,7 @@ import { testData } from "../../utils/testData";
 import * as auth from "../../utils/auth";
 import api from "../../utils/api";
 import { SignUpPopup } from "../SignUpPopup/SignUpPopup";
+import { SuccessPopup } from "../SuccessPopup/SuccessPopup";
 
 function App() {
   const [success, setSuccess] = useState(false);
@@ -27,6 +28,7 @@ function App() {
   const [isInfoTolltipOpen, setIsInfoTolltipPopup] = useState(false);
   const [isSignInPopup, setIsSignInPopup] = useState(false);
   const [isSignUpPopup, setIsSignUpPopup] = useState(false);
+  const [isSuccessPopup, setIsSuccessPopup] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const [savedCardsData, setSavedCardsData] = useState(testData)
@@ -44,6 +46,12 @@ function App() {
     setOpenPage('Home')
     navigator('/')
   };
+
+  const onSignUp = () => {
+    closeAllPopups();
+    setSuccess(true);
+    setIsSuccessPopup(true);
+  }
 
   React.useEffect(() => {
     const closeByEscape = (e) => {
@@ -72,6 +80,7 @@ function App() {
   function closeAllPopups() {
     setIsSignInPopup(false);
     setIsSignUpPopup(false);
+    setIsSuccessPopup(false);
   }
 
   return (
@@ -80,12 +89,12 @@ function App() {
           <Route path="/" element={
               <>
                 <Main
+                  isLoggedIn={isLoggedIn}
+                  handleLogout={onLogout}
                   openPage={openPage}
                   setOpenPage={setOpenPage}
-                  isLoggedIn={isLoggedIn}
                   isLoading={isLoading}
                   isSearchResultOpen={isSearchResultOpen}
-                  handleLogout={onLogout}
                   handleSigninPopup={handleSigninPopup}
                 />
 
@@ -100,7 +109,13 @@ function App() {
                   isOpen={isSignUpPopup}
                   onClose={closeAllPopups}
                   handleSigninPopup={handleSigninPopup}
-                  onSignIn={onLogin}
+                  onSignUp={onSignUp}
+                />
+
+                <SuccessPopup 
+                  isOpen={isSuccessPopup}
+                  onClose={closeAllPopups}
+                  handleSigninPopup={handleSigninPopup}
                 />
               </>
             }
@@ -109,6 +124,7 @@ function App() {
           <Route path="/saved-news" element={
               <SavedNews 
                 isLoggedIn={isLoggedIn}
+                handleLogout={onLogout}
                 openPage={openPage}
                 setOpenPage={setOpenPage}
                 savedCardsData={savedCardsData}

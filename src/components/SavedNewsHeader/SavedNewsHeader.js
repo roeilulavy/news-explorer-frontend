@@ -1,11 +1,12 @@
 import './SavedNewsHeader.css';
 import { Navigation } from '../Navigation/Navigation';
 
-export function SavedNewsHeader({ isLoggedIn, openPage, setOpenPage }) {
+export function SavedNewsHeader({ isLoggedIn, handleLogout, openPage, setOpenPage }) {
   return (
     <header className='savedNewsHeader'>
       <Navigation
         isLoggedIn={isLoggedIn}
+        handleLogout={handleLogout}
         openPage={openPage}
         setOpenPage={setOpenPage}
       />
