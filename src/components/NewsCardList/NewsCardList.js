@@ -37,7 +37,9 @@ export function NewsCardList({ isLoading, cardsData, allCardsData, showMore }) {
                 <button type='button' className='cards__button-show-more' onClick={() => showMore()}>Show more</button>
               }
             </>
-            : <NotFound />
+            : <NotFound
+                text={'Sorry, but nothing matched your search terms.'}
+              />
       }
     </section>
   )

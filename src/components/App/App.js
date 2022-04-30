@@ -63,7 +63,7 @@ function App() {
 
   React.useEffect(() => {
     setIsSearchResultOpen(false);
-  }, []);
+  }, [openPage]);
 
   function handleSearch() {
     setIsLoading(true);
