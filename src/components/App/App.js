@@ -9,11 +9,12 @@ import { SignInPopup } from "../SignInPopup/SignInPopup";
 import { testData } from "../../utils/testData";
 import * as auth from "../../utils/auth";
 import api from "../../utils/api";
+import { SignUpPopup } from "../SignUpPopup/SignUpPopup";
 
 function App() {
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
   const token = localStorage.getItem("jwt");
 
@@ -34,7 +35,8 @@ function App() {
   const navigator = useNavigate();
 
   const onLogin = (email, password) => {
-    setIsLoggedIn(true)
+    closeAllPopups();
+    setIsLoggedIn(true);
   };
 
   const onLogout = () => {
@@ -58,7 +60,13 @@ function App() {
   }, []);
 
   function handleSigninPopup() {
+    closeAllPopups();
     setIsSignInPopup(true);
+  }
+
+  function handleSignupPopup() {
+    closeAllPopups();
+    setIsSignUpPopup(true);
   }
 
   function closeAllPopups() {
@@ -84,12 +92,21 @@ function App() {
                 <SignInPopup
                   isOpen={isSignInPopup}
                   onClose={closeAllPopups}
+                  handleSignupPopup={handleSignupPopup}
+                  onSignIn={onLogin}
+                />
+
+                <SignUpPopup
+                  isOpen={isSignUpPopup}
+                  onClose={closeAllPopups}
+                  handleSigninPopup={handleSigninPopup}
+                  onSignIn={onLogin}
                 />
               </>
             }
           />
 
-          <Route path="/saved-articles" element={
+          <Route path="/saved-news" element={
               <SavedNews 
                 isLoggedIn={isLoggedIn}
                 openPage={openPage}

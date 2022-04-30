@@ -1,5 +1,4 @@
 import './PopupWithForm.css';
-import { Link } from "react-router-dom";
 
 export function PopupWithForm(props) {
   return (
@@ -12,9 +11,9 @@ export function PopupWithForm(props) {
             <button type="submit" className="popup__submit">{props.buttonText}</button>
             <span className="popup__span">
               or{" "}
-              <Link to={props.link} className="popup__span-link">
+              <span className="popup__span-link" onClick={props.handlePopup}>
                 {props.linkText}
-              </Link>
+              </span>
             </span>
         </form>
       </div>

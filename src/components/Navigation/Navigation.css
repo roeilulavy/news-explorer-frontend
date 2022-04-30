@@ -93,6 +93,10 @@
   transition: opacity .5s;
 }
 
+.navigation__button:hover {
+  opacity: 0.8;
+}
+
 .navigation-dark {
   height: 80px;
   margin: 0;
@@ -154,4 +158,28 @@
   transition: opacity .5s;
   padding: 12px 19px;
   gap: 20px;
+}
+
+.navigation__button-dark {
+  box-sizing: border-box;
+  min-width: 176px;
+  background-color: transparent;
+  border-style: none;
+  border: 1px solid black;
+  color: black;
+  border-radius: 100px;
+  font-family: 'Roboto',sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 11px 60px;
+  transition: opacity .5s;
+}
+
+.navigation__button-dark:hover {
+  opacity: 0.8;
 }

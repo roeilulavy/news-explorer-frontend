@@ -2,8 +2,14 @@ import "./Main.css";
 import { Header } from "../Header/Header";
 import { About } from "../About/About";
 import { NewsCardList } from "../NewsCardList/NewsCardList";
+import React from "react";
 
 export function Main({ isLoggedIn, openPage, setOpenPage, handleLogout, handleSigninPopup, isSearchResultOpen, isLoading }) {
+
+  React.useEffect(() => {
+    setOpenPage('Home')
+  }, [setOpenPage])
+
   return (
     <main>
       <Header

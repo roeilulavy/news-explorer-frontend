@@ -9,12 +9,11 @@ export function Navigation ({ isLoggedIn, openPage, setOpenPage, handleLogout, h
   const [darkNav, setDarkNav] = useState(false);
 
   React.useEffect(() => {
-    if (openPage === 'Saved-articles') {
+    if (openPage === 'Saved-news') {
       setDarkNav(true)
     } else {
       setDarkNav(false)
     }
-    console.log(openPage)
   }, [openPage])
 
   function handleHomeBtn() {
@@ -23,8 +22,8 @@ export function Navigation ({ isLoggedIn, openPage, setOpenPage, handleLogout, h
   }
 
   function handleSavedArticlesBtn() {
-    setOpenPage('Saved-articles')
-    navigation('/saved-articles');
+    setOpenPage('Saved-news')
+    navigation('/saved-news');
   }
 
   return (
@@ -36,7 +35,7 @@ export function Navigation ({ isLoggedIn, openPage, setOpenPage, handleLogout, h
         </li>
         {isLoggedIn ?
         <>
-          <li className={`navigation__link ${darkNav && 'navigation__link-dark'} ${openPage === 'Saved-articles' && `navigation__link_active-dark`}`} onClick={handleSavedArticlesBtn}>
+          <li className={`navigation__link ${darkNav && 'navigation__link-dark'} ${openPage === 'Saved-news' && `navigation__link_active-dark`}`} onClick={handleSavedArticlesBtn}>
           Saved articles
           </li>
           <li className={`navigation__button-user ${darkNav && 'navigation__button-user-dark'}`} onClick={handleLogout}>
@@ -45,7 +44,7 @@ export function Navigation ({ isLoggedIn, openPage, setOpenPage, handleLogout, h
           </li>
         </>
          :
-        <li className='navigation__button' onClick={handleSigninPopup}>
+        <li className={`navigation__button ${darkNav && 'navigation__button-dark'}`} onClick={handleSigninPopup}>
           Sign in
         </li>
         }
