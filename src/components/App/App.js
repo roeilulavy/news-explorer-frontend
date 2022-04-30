@@ -18,20 +18,18 @@ function App() {
   const token = localStorage.getItem("jwt");
 
   const [currentUser, setCurrentUser] = useState({});
-  const [cards, setCards] = useState(3);
-  const[cardsToDisplay, setCardsToDisplay] = useState([]);
-
+  
   const [openPage, setOpenPage] = useState('');
   const [isSearchResultOpen, setIsSearchResultOpen] = useState(false);
-
+  
   const [isSignInPopup, setIsSignInPopup] = useState(false);
   const [isSignUpPopup, setIsSignUpPopup] = useState(false);
   const [isSuccessPopup, setIsSuccessPopup] = useState(false);
   const [isFailurePopup, setIsFailurePopup] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  const [savedCardsData, setSavedCardsData] = useState(testData)
-  const [allCardsData, setAllCardsData] = useState(testData)
+  
+  const [cards, setCards] = useState([]);
+  const [cardsToDisplay, setCardsToDisplay] = useState(3);
 
   const navigator = useNavigate();
 
@@ -52,6 +50,10 @@ function App() {
     setIsSuccessPopup(true);
   }
 
+  const showMore = () => {
+    setCardsToDisplay((prevValue) => prevValue + 3);
+  }
+
   React.useEffect(() => {
     const closeByEscape = (e) => {
       if (e.key === "Escape") {
@@ -70,20 +72,8 @@ function App() {
     setIsSearchResultOpen(true);
     setIsLoading(true);
     
-    let cardsToRender =[];
-    for (let i = 0; i < cards; i++) {
-      if (testData[i]) {
-        cardsToRender.push(testData[i]);
-      }
-    }
-    setCards(cards + 3);
-    
-    setIsLoading(false)
-    setCardsToDisplay(cardsToRender);
-  }
-
-  function showMore() {
-
+    setCards(testData);
+    setIsLoading(false);
   }
 
   function handleSigninPopup() {
@@ -115,8 +105,8 @@ function App() {
                   setOpenPage={setOpenPage}
                   onSearch={handleSearch}
                   isLoading={isLoading}
+                  cards={cards}
                   cardsToDisplay={cardsToDisplay}
-                  allCardsData={allCardsData}
                   showMore={showMore}
                   isSearchResultOpen={isSearchResultOpen}
                   handleSigninPopup={handleSigninPopup}
@@ -156,7 +146,6 @@ function App() {
                 handleLogout={onLogout}
                 openPage={openPage}
                 setOpenPage={setOpenPage}
-                savedCardsData={allCardsData}
               />
             }
           />

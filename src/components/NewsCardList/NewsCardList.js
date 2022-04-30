@@ -3,20 +3,18 @@ import { PreLoader } from '../PreLoader/PreLoader'
 import { NewsCard } from '../NewsCard/NewsCard'
 import { NotFound } from '../NotFound/NotFound'
 
-export function NewsCardList({ isLoading, cardsToDisplay, allCardsData, text, showMore }) {
+export function NewsCardList({ isLoading, cards, cardsToDisplay, allCardsData, text, showMore }) {
 
   return (
     <section className='cards'>
       {
         isLoading ? 
           <PreLoader /> :
-          cardsToDisplay ?
+          cards ?
             <>
               <h2 className='cards__title'>Search Result</h2>
               <div className='cards__wrapper'>
-                {
-                  cardsToDisplay.map((card) => {
-
+                {cards.slice(0, cardsToDisplay).map((card) => {
                     return (
                       <NewsCard
                       card={card}
@@ -33,7 +31,7 @@ export function NewsCardList({ isLoading, cardsToDisplay, allCardsData, text, sh
                 }
               </div>
               {
-                allCardsData.length !== cardsToDisplay.length &&
+                cards.length !== cardsToDisplay.length &&
                 <button type='button' className='cards__button-show-more' onClick={() => showMore()}>Show more</button>
               }
             </>
