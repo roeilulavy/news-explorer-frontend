@@ -18,7 +18,8 @@ function App() {
   const token = localStorage.getItem("jwt");
 
   const [currentUser, setCurrentUser] = useState({});
-  const [cards, setCards] = useState([]);
+  const [cards, setCards] = useState(3);
+  const[cardsToDisplay, setCardsToDisplay] = useState([]);
 
   const [openPage, setOpenPage] = useState('');
   const [isSearchResultOpen, setIsSearchResultOpen] = useState(false);
@@ -66,12 +67,23 @@ function App() {
   }, [openPage]);
 
   function handleSearch() {
-    setIsLoading(true);
     setIsSearchResultOpen(true);
+    setIsLoading(true);
+    
+    let cardsToRender =[];
+    for (let i = 0; i < cards; i++) {
+      if (testData[i]) {
+        cardsToRender.push(testData[i]);
+      }
+    }
+    setCards(cards + 3);
+    
+    setIsLoading(false)
+    setCardsToDisplay(cardsToRender);
+  }
 
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1500)
+  function showMore() {
+
   }
 
   function handleSigninPopup() {
@@ -103,6 +115,9 @@ function App() {
                   setOpenPage={setOpenPage}
                   onSearch={handleSearch}
                   isLoading={isLoading}
+                  cardsToDisplay={cardsToDisplay}
+                  allCardsData={allCardsData}
+                  showMore={showMore}
                   isSearchResultOpen={isSearchResultOpen}
                   handleSigninPopup={handleSigninPopup}
                 />
@@ -141,7 +156,7 @@ function App() {
                 handleLogout={onLogout}
                 openPage={openPage}
                 setOpenPage={setOpenPage}
-                savedCardsData={savedCardsData}
+                savedCardsData={allCardsData}
               />
             }
           />

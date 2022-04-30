@@ -4,7 +4,7 @@ import { About } from "../About/About";
 import { NewsCardList } from "../NewsCardList/NewsCardList";
 import React from "react";
 
-export function Main({ isLoggedIn, handleLogout, openPage, setOpenPage, onSearch, isSearchResultOpen, isLoading, handleSigninPopup }) {
+export function Main({ isLoggedIn, handleLogout, openPage, setOpenPage, onSearch, cardsToDisplay, allCardsData, showMore, isSearchResultOpen, isLoading, handleSigninPopup }) {
 
   React.useEffect(() => {
     setOpenPage('Home')
@@ -21,7 +21,14 @@ export function Main({ isLoggedIn, handleLogout, openPage, setOpenPage, onSearch
         onSearch={onSearch}
       />
 
-      {isSearchResultOpen && <NewsCardList isLoading={isLoading} text={'Sorry, but nothing matched your search terms.'} />}
+      {isSearchResultOpen && 
+        <NewsCardList
+          isLoading={isLoading}
+          cardsToDisplay={cardsToDisplay}
+          allCardsData={allCardsData}
+          showMore={showMore}
+          text={'Sorry, but nothing matched your search terms.'}
+        />}
 
       <About />
     </main>
