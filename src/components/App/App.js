@@ -30,8 +30,9 @@ function App() {
   
   const [cards, setCards] = useState([]);
   const [cardsToDisplay, setCardsToDisplay] = useState(3);
+  const [savedCardsData, setSavedCardsData] = useState([]);
 
-  const navigator = useNavigate();
+  const navigation = useNavigate();
 
   const onLogin = (email, password) => {
     closeAllPopups();
@@ -41,18 +42,14 @@ function App() {
   const onLogout = () => {
     setIsLoggedIn(false);
     setOpenPage('Home')
-    navigator('/')
+    navigation('/')
   };
 
   const onSignUp = () => {
     closeAllPopups();
     setSuccess(true);
     setIsSuccessPopup(true);
-  }
-
-  const showMore = () => {
-    setCardsToDisplay((prevValue) => prevValue + 3);
-  }
+  };
 
   React.useEffect(() => {
     const closeByEscape = (e) => {
@@ -68,13 +65,23 @@ function App() {
     setIsSearchResultOpen(false);
   }, [openPage]);
 
+  React.useEffect(() => {
+    setSavedCardsData(testData);
+  }, [])
+
   function handleSearch() {
     setIsSearchResultOpen(true);
     setIsLoading(true);
     
-    setCards(testData);
-    setIsLoading(false);
+    setTimeout(() => {
+      setCards(testData);
+      setIsLoading(false);
+    }, 1000);
   }
+
+  const showMore = () => {
+    setCardsToDisplay((prevValue) => prevValue + 3);
+  };
 
   function handleSigninPopup() {
     closeAllPopups();
@@ -146,6 +153,7 @@ function App() {
                 handleLogout={onLogout}
                 openPage={openPage}
                 setOpenPage={setOpenPage}
+                savedCardsData={savedCardsData}
               />
             }
           />

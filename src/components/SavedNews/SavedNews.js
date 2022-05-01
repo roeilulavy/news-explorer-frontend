@@ -20,6 +20,7 @@ export function SavedNews({ isLoggedIn, handleLogout, openPage, setOpenPage, sav
 
       <NewsCardList
         isLoggedIn={isLoggedIn}
+        openPage={openPage}
         savedCardsData={savedCardsData}
         text={''}
       />
