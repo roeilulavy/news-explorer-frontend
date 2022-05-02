@@ -3,7 +3,7 @@ import { PreLoader } from '../PreLoader/PreLoader'
 import { NewsCard } from '../NewsCard/NewsCard'
 import { NotFound } from '../NotFound/NotFound'
 
-export function NewsCardList({ openPage, isLoading, cards, cardsToDisplay, savedCardsData, text, showMore }) {
+export function NewsCardList({ isLoggedIn, openPage, isLoading, cards, cardsToDisplay, savedCardsData, text, showMore }) {
 
   return (
     <section className='cards'>
@@ -19,18 +19,20 @@ export function NewsCardList({ openPage, isLoading, cards, cardsToDisplay, saved
                       <NewsCard
                         card={card}
                         key={card.id}
+                        cardButtonType={'save'}
+                        cardSpan={isLoggedIn ? 'Add to saved' : 'Sign in to save articles'}
                         cardImg={card.img}
                         cardDate={card.date}
                         cardTitle={card.title}
                         cardSubtitle={card.subtitle}
                         cardCaption={card.caption}
-                        cardKeyWord={card.keyword} />
+                        cardkeyword={card.keyword} />
                     )
                   })}
                 </div>
                 {
-                  cards.length !== cardsToDisplay.length &&
-                  <button type='button' className='cards__button-show-more' onClick={() => showMore()}>Show more</button>
+                  cards.length >= cardsToDisplay &&
+                  <button type='button' className='cards__button-show-more' onClick={() => showMore()}>Show more</button> 
                 }
             </>
         :
@@ -39,14 +41,17 @@ export function NewsCardList({ openPage, isLoading, cards, cardsToDisplay, saved
               {savedCardsData.map((card) => {
                 return (
                   <NewsCard
+                    openPage={openPage}
                     card={card}
                     key={card.id}
+                    cardButtonType={'trash'}
+                    cardSpan={'Remove from save'}
                     cardImg={card.img}
                     cardDate={card.date}
                     cardTitle={card.title}
                     cardSubtitle={card.subtitle}
                     cardCaption={card.caption}
-                    cardKeyWord={card.keyword} />
+                    cardkeyword={card.keyword} />
                 )
               })}
             </div>

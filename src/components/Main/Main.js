@@ -23,6 +23,7 @@ export function Main({ isLoggedIn, handleLogout, openPage, setOpenPage, onSearch
 
       {isSearchResultOpen && 
         <NewsCardList
+          isLoggedIn={isLoggedIn}
           openPage={openPage}
           isLoading={isLoading}
           cards={cards}

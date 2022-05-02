@@ -61,13 +61,15 @@ function App() {
     return () => document.removeEventListener("keydown", closeByEscape);
   }, []);
 
-  React.useEffect(() => {
-    setIsSearchResultOpen(false);
-  }, [openPage]);
-
+  
   React.useEffect(() => {
     setSavedCardsData(testData);
   }, [])
+  
+  React.useEffect(() => {
+    setIsSearchResultOpen(false);
+    setCardsToDisplay(3)
+  }, [openPage]);
 
   function handleSearch() {
     setIsSearchResultOpen(true);
