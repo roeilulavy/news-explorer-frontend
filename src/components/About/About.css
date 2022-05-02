@@ -38,3 +38,31 @@
   color: #1A1B22;
   margin: 24px 0 0;
 }
+
+@media screen and (max-width:868px) {
+  .about {
+    min-height: 354px;
+    gap: 32px;
+    padding: 0 40px;
+  }
+  
+  .about__image{
+    max-width: 232px;
+    max-height: 232px;
+  }
+  
+  .about__text-wrapper{
+    align-self: flex-start;
+    max-width: 424px;
+    margin-top: 40px;
+  }
+
+  .about__title{
+    font-size: 30px;
+    line-height: 40px;
+  }
+  
+  .about__text{
+    margin: 16px 0 0;
+  }
+}

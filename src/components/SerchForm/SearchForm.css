@@ -48,3 +48,10 @@
 .searchForm__button:active {
   background-color:#2A65CC ;
 }
+
+@media screen and (max-width:868px) {
+  .searchForm {
+    height: 56px;
+    margin: 48px 0 0;
+  }
+}

@@ -68,3 +68,26 @@
 .footer__icon_type_github {
   background-image: url('../../images/icons/github_icon.svg');
 }
+
+@media screen and (max-width:868px) {
+  .footer {
+    padding: 24px 40px 18px;
+  }
+
+  .footer__nav {
+    gap: 0px;
+  }
+
+  .footer__nav-item {
+    gap: 24px;
+  }
+
+  .footer__link {
+    margin-right: 24px;
+    margin-left: 0;
+  }
+
+  .footer__icon_type_facebook {
+    background-image: url('../../images/icons/facebook_round_icon.svg');
+  }
+}

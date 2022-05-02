@@ -22,15 +22,15 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto;
-  grid-column-gap:16px;
-  grid-row-gap:16px;
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
   flex-wrap: wrap;
 }
 
 .cards__button-show-more{
   background: #FFFFFF;
   border-radius: 80px;
-  border:none;
+  border: none;
   font-family: 'Roboto',sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -48,4 +48,27 @@
 .cards__button-show-more:hover{
   background-color:#E8E8E8 ;
   opacity: 0.9;
+}
+
+@media screen and (max-width:868px) {
+  .cards {
+    padding: 40px 40px;
+  }
+
+  .cards__title{
+    font-size: 30px;
+    line-height: 34px;
+    padding: 16px 0 32px;
+  }
+
+  .cards__wrapper{
+    grid-column-gap: 8px;
+    grid-row-gap: 8px;
+  }
+
+  .cards__button-show-more{
+    max-width: 240px;
+    padding: 16px 74px;
+    margin: 32px 0 0;
+  }
 }

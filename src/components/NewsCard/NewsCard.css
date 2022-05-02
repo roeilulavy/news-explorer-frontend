@@ -25,6 +25,10 @@
   background-image: url('../../images/buttons/save_btn_hover.svg');
 }
 
+.card__button_type_save:active {
+  background-image: url('../../images/buttons/save_btn_marked.svg');
+}
+
 .card__button_type_save-marked {
   position: absolute;
   height: 40px;
@@ -122,6 +126,13 @@
 }
 
 .card__title {
+  height: 60px;
+  max-width: 352px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
   font-family: 'Roboto-Slab',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -132,6 +143,12 @@
 }
 
 .card__subtitle {
+  height: 88px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
   font-family: 'Roboto',sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -151,4 +168,59 @@
   text-transform: uppercase;
   color: #B6BCBF;
   margin: 18px 0 0;
+}
+
+@media screen and (max-width:868px) {
+  .card {
+    width: 224px;
+    height: 420px;
+  }
+
+  .card__button_type_save {
+    top: 8px;
+    right: 8px;
+  }
+
+  .card__button_type_save-marked {
+    top: 8px;
+    right: 8px;
+  }
+  
+  .card__button_type_trash {
+    top: 8px;
+    right: 8px;
+  }
+
+  .card__span {
+    visibility: hidden;
+  }
+
+  .card__keyword {
+    height: 40px;
+    width: fit-content;
+    max-width: 120px;
+    top: 8px;
+    left: 8px;
+    padding: 8px 20px;
+  }
+
+  .card__content {
+    padding: 20px 15px 16px;
+  }
+  
+  .card__title {
+    height: 72px;
+    max-width: 192px;
+    font-size: 22px;
+    line-height: 24px;
+    margin: 8px 0 0;
+  }
+
+  .card__subtitle {
+    margin: 10px 0 0;
+  }
+  
+  .card__caption {
+    margin: 12px 0 0;
+  }
 }

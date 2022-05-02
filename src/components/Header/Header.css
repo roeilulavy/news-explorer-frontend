@@ -17,9 +17,9 @@
 .header__title {
   font-family: 'Roboto-slab',sans-serif;
   font-style: normal;
+  font-weight: 400;
   font-size: 60px;
   line-height: 64px;
-  font-weight: 400;
   margin: 0;
 }
 
@@ -30,4 +30,20 @@
   line-height: 24px;
   font-weight: 400;
   margin: 32px 0 0;
+}
+
+@media screen and (max-width:868px) {
+  .header__content {
+    max-width: 452px;
+    margin: 38px auto 48px;
+  }
+
+  .header__title {
+    font-size: 36px;
+    line-height: 40px;
+  }
+
+  .header__subtitle {
+    margin: 16px 0 0;
+  }
 }

@@ -102,6 +102,10 @@ function App() {
     setIsFailurePopup(false);
   }
 
+  function handleSaveCard() {
+
+  }
+
   return (
       <div className="App">
         <Routes>
@@ -116,6 +120,7 @@ function App() {
                   isLoading={isLoading}
                   cards={cards}
                   cardsToDisplay={cardsToDisplay}
+                  savedCardsData={savedCardsData}
                   showMore={showMore}
                   isSearchResultOpen={isSearchResultOpen}
                   handleSigninPopup={handleSigninPopup}

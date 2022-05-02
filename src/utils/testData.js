@@ -12,7 +12,7 @@ const testData = [
   },
   {
     img: testImage,
-    title: `2`,
+    title: `Nature makes you better`,
     subtitle: `Ever since I read Richard Louv's influential book, "Last Child in the Woods," the idea of having a special "sit spot" has stuck with me. This advice, which Louv attributes to nature educator Jon Young, is for both adults and children to find...`,
     caption: 'treehugger',
     date: 'November 4, 2020',
@@ -21,7 +21,7 @@ const testData = [
   },
   {
     img: testImage,
-    title: `3`,
+    title: `Grand Teton Renews Historic Crest Trail dsfgsdg sdg sdg`,
     subtitle: `Ever since I read Richard Louv's influential book, "Last Child in the Woods," the idea of having a special "sit spot" has stuck with me. This advice, which Louv attributes to nature educator Jon Young, is for both adults and children to find...`,
     caption: 'treehugger',
     date: 'November 4, 2020',
@@ -30,7 +30,7 @@ const testData = [
   }, {
     img: testImage,
     title: `4`,
-    subtitle: `Ever since I read Richard Louv's influential book, "Last Child in the Woods," the idea of having a special "sit spot" has stuck with me. This advice, which Louv attributes to nature educator Jon Young, is for both adults and children to find...`,
+    subtitle: `Ever since I read Richard Louv's influential book,`,
     caption: 'treehugger',
     date: 'November 4, 2020',
     keyword: 'Nature',
