@@ -3,10 +3,15 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import LogoutIconWhite from '../../images/buttons/logout_icon_white.svg';
 import LogoutIconBlack from '../../images/buttons/logout_icon_black.svg';
+import MenuIconWhite from '../../images/buttons/menu_white_icon.svg';
+import MenuIconBlack from '../../images/buttons/menu_black_icon.svg';
+import CloseIconWhite from '../../images/buttons/close_white_icon.svg';
+import CloseIconBlack from '../../images/buttons/close_black_icon.svg';
 
 export function Navigation ({ isLoggedIn, openPage, setOpenPage, handleLogout, handleSigninPopup }) {
   const navigation = useNavigate()
   const [darkNav, setDarkNav] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   React.useEffect(() => {
     if (openPage === 'Saved-news') {
@@ -29,7 +34,18 @@ export function Navigation ({ isLoggedIn, openPage, setOpenPage, handleLogout, h
   return (
     <nav className={`navigation ${darkNav && 'navigation-dark'}`}>
       <h1 className={`navigation__title ${darkNav && 'navigation__title-dark'}`}>NewsExplorer</h1>
-      
+
+      <img className="navigation__menu-button" src={isMenuOpen ? CloseIconWhite : MenuIconWhite} onClick={() => setIsMenuOpen(!isMenuOpen)} alt="menu" />
+
+      {
+        isMenuOpen && 
+        <div className='navigation__container'>
+          <div className='navigation__content'>
+            <div className='navigation__content__border' />
+          </div>
+        </div>
+      }
+
       <ul className='navigation__list'>
         <li className={`navigation__link ${darkNav && 'navigation__link-dark'} ${openPage === 'Home' && `navigation__link_active`}`} onClick={handleHomeBtn}>
           Home
