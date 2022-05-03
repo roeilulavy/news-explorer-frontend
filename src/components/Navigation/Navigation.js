@@ -22,13 +22,14 @@ export function Navigation ({ isLoggedIn, openPage, setOpenPage, handleLogout, h
   }
 
   function handleSavedArticlesBtn() {
-    setOpenPage('Saved-news')
+    setOpenPage('Saved-news');
     navigation('/saved-news');
   }
 
   return (
     <nav className={`navigation ${darkNav && 'navigation-dark'}`}>
       <h1 className={`navigation__title ${darkNav && 'navigation__title-dark'}`}>NewsExplorer</h1>
+      
       <ul className='navigation__list'>
         <li className={`navigation__link ${darkNav && 'navigation__link-dark'} ${openPage === 'Home' && `navigation__link_active`}`} onClick={handleHomeBtn}>
           Home

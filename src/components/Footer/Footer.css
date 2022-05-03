@@ -91,3 +91,30 @@
     background-image: url('../../images/icons/facebook_round_icon.svg');
   }
 }
+
+@media screen and (max-width:500px) {
+  .footer {
+    flex-direction: column-reverse;
+    padding: 20px 16px 22px;
+  }
+
+  .footer__nav-item:first-of-type {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .footer__link {
+    margin-right: 24px;
+    margin-left: 0;
+  }
+
+  .footer__icon_type_facebook {
+    background-image: url('../../images/icons/facebook_round_icon.svg');
+  }
+
+  .footer__title {
+    margin: 38px 0 0;
+  }
+}

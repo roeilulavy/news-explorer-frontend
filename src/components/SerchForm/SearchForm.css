@@ -55,3 +55,24 @@
     margin: 48px 0 0;
   }
 }
+
+@media screen and (max-width:500px) {
+  .searchForm {
+    display: flex;
+    flex-direction: column;
+    height: 128px;
+    margin: 122px 0 0;
+    gap: 16px;
+  }
+
+  .searchForm__input {
+    width: auto;
+    padding: 17px 16px;
+  }
+
+  .searchForm__button {
+    width: 288px;
+    height: 56px;
+    margin: 0;
+  }
+}

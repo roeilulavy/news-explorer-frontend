@@ -72,3 +72,33 @@
     margin: 32px 0 0;
   }
 }
+
+@media screen and (max-width:706px) {
+  .cards__wrapper{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width:500px) {
+  .cards {
+    padding: 24px 16px 24px;
+  }
+
+  .cards__wrapper{
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .cards__title{
+    padding: 8px 0 58px;
+  }
+
+  .cards__wrapper{
+    grid-row-gap: 10px;
+  }
+
+  .cards__button-show-more{
+    max-width: 288px;
+    padding: 16px 98px;
+    margin: 16px 0 0;
+  }
+}

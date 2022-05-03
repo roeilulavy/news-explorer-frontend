@@ -223,4 +223,50 @@
   .card__caption {
     margin: 12px 0 0;
   }
+
+  @media screen and (max-width:500px) {
+    .card {
+      width: 288px;
+      height: 444px;
+    }
+
+    .card__button_type_save {
+      top: 16px;
+      right: 16px;
+    }
+  
+    .card__button_type_save-marked {
+      top: 16px;
+      right: 16px;
+    }
+    
+    .card__button_type_trash {
+      top: 16px;
+      right: 16px;
+    }
+
+    .card__keyword {
+      top: 16px;
+      left: 16px;
+    }
+
+    .card__content {
+      padding: 16px;
+    }
+
+    .card__title {
+      height: 48px;
+      max-width: 256px;
+      -webkit-line-clamp: 2;
+      margin: 10px 0 0;
+    }
+
+    .card__subtitle {
+      margin: 14px 0 0;
+    }
+    
+    .card__caption {
+      margin: 8px 0 0;
+    }
+  }
 }

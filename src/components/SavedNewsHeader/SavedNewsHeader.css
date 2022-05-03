@@ -55,4 +55,14 @@
     line-height: 34px;
     margin: 16px 0;
   }
+
+  @media screen and (max-width:500px) {
+    .savedNewsHeader__content {
+      padding: 8px 16px 32px;
+    }
+
+    .savedNewsHeader__title {
+      font-size: 12px;
+    }
+  }
 }
