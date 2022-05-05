@@ -6,7 +6,6 @@ import LogoutIconBlack from '../../images/buttons/logout_icon_black.svg';
 import MenuIconWhite from '../../images/buttons/menu_white_icon.svg';
 import MenuIconBlack from '../../images/buttons/menu_black_icon.svg';
 import CloseIconWhite from '../../images/buttons/close_white_icon.svg';
-import CloseIconBlack from '../../images/buttons/close_black_icon.svg';
 
 export function Navigation ({ isLoggedIn, openPage, setOpenPage, handleLogout, handleSigninPopup }) {
   const navigation = useNavigate()
@@ -33,15 +32,35 @@ export function Navigation ({ isLoggedIn, openPage, setOpenPage, handleLogout, h
 
   return (
     <nav className={`navigation ${darkNav && 'navigation-dark'}`}>
-      <h1 className={`navigation__title ${darkNav && 'navigation__title-dark'}`}>NewsExplorer</h1>
+      <h1 className={`${isMenuOpen ? 'navigation__title' : darkNav ? 'navigation__title-dark' : 'navigation__title'}`}>NewsExplorer</h1>
 
-      <img className="navigation__menu-button" src={isMenuOpen ? CloseIconWhite : MenuIconWhite} onClick={() => setIsMenuOpen(!isMenuOpen)} alt="menu" />
+      <img className="navigation__menu-button" src={isMenuOpen ? CloseIconWhite : openPage === 'Saved-news' ? MenuIconBlack : MenuIconWhite} onClick={() => setIsMenuOpen(!isMenuOpen)} alt="menu" />
 
       {
         isMenuOpen && 
         <div className='navigation__container'>
           <div className='navigation__content'>
             <div className='navigation__content__border' />
+            <ul className='navigation__content__list'>
+              <li className='navigation__content__link' onClick={handleHomeBtn}>
+                Home
+              </li>
+              {isLoggedIn ?
+                <>
+                  <li className='navigation__content__link' onClick={handleSavedArticlesBtn}>
+                  Saved articles
+                  </li>
+                  <li className='navigation__content__button' onClick={handleLogout}>
+                    User
+                    <img src={LogoutIconWhite} alt='Log out'/>
+                  </li>
+                </>
+                :
+                <li className='navigation__content__button' onClick={handleSigninPopup}>
+                  Sign in
+                </li>
+                }
+            </ul>
           </div>
         </div>
       }

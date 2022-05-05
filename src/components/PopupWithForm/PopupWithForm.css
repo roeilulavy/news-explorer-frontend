@@ -16,7 +16,7 @@
 .popup_is-open{
   visibility: visible;
   opacity: 1;
-  z-index: 1;
+  z-index: 3;
 }
 
 .popup__close{
@@ -121,4 +121,30 @@
   text-decoration: none;
   cursor: pointer;
   margin: 14px 0 23px;
+}
+
+@media screen and (max-width: 500px) {
+  .popup__close{
+    width: 24px;
+    height: 24px;
+    top: -16;
+    right: 16px;
+  }
+  
+  .popup__close:hover{
+    opacity: 0.6;
+  }
+
+  .popup__content{
+    position: absolute;
+    top: 56px;
+    bottom: 0;
+    width: 320px;
+    border-radius: 16px 16px 0 0;
+    padding: 16px 16px 0;
+  }
+
+  .popup__submit{
+    min-width: 288px;
+  }
 }
