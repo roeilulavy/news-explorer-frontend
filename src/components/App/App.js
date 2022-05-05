@@ -102,10 +102,6 @@ function App() {
     setIsFailurePopup(false);
   }
 
-  function handleSaveCard() {
-
-  }
-
   return (
       <div className="App">
         <Routes>

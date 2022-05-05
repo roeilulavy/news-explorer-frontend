@@ -21,11 +21,13 @@ export function Navigation ({ isLoggedIn, openPage, setOpenPage, handleLogout, h
   }, [openPage])
 
   function handleHomeBtn() {
-    setOpenPage('Home')
+    setIsMenuOpen(false);
+    setOpenPage('Home');
     navigation('/');
   }
 
   function handleSavedArticlesBtn() {
+    setIsMenuOpen(false);
     setOpenPage('Saved-news');
     navigation('/saved-news');
   }
@@ -59,7 +61,7 @@ export function Navigation ({ isLoggedIn, openPage, setOpenPage, handleLogout, h
                 <li className='navigation__content__button' onClick={handleSigninPopup}>
                   Sign in
                 </li>
-                }
+              }
             </ul>
           </div>
         </div>
