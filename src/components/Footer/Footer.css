@@ -1,0 +1,120 @@
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  margin: 0;
+  padding: 32px 104px 26px;
+}
+
+.footer__title {
+  margin: 0px;
+  font-family: 'Roboto',sans-serif;;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #B6BCBF;
+}
+
+.footer__nav {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  padding: 0;
+  margin: 0;
+}
+
+.footer__nav-item {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  list-style: none;
+}
+
+.footer__nav-item:first-child {
+  gap: 0;
+}
+
+.footer__link {
+  text-decoration: none;
+  font-family: 'Roboto',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  color: #1A1B22;
+  margin: 0 18px;
+  transition: opacity .2s ease-in;
+}
+
+.footer__link:hover {
+  opacity: 0.5;
+}
+
+.footer__icon {
+  height: 24px;
+  width: 24px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.footer__icon_type_facebook {
+  background-image: url('../../images/icons/facebook_icon.svg');
+}
+
+.footer__icon_type_github {
+  background-image: url('../../images/icons/github_icon.svg');
+}
+
+@media screen and (max-width:868px) {
+  .footer {
+    padding: 24px 40px 18px;
+  }
+
+  .footer__nav {
+    gap: 0px;
+  }
+
+  .footer__nav-item {
+    gap: 24px;
+  }
+
+  .footer__link {
+    margin-right: 24px;
+    margin-left: 0;
+  }
+
+  .footer__icon_type_facebook {
+    background-image: url('../../images/icons/facebook_round_icon.svg');
+  }
+}
+
+@media screen and (max-width:500px) {
+  .footer {
+    flex-direction: column-reverse;
+    padding: 20px 16px 22px;
+  }
+
+  .footer__nav-item:first-of-type {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .footer__link {
+    margin-right: 24px;
+    margin-left: 0;
+  }
+
+  .footer__icon_type_facebook {
+    background-image: url('../../images/icons/facebook_round_icon.svg');
+  }
+
+  .footer__title {
+    margin: 38px 0 0;
+  }
+}

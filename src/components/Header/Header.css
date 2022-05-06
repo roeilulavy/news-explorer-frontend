@@ -1,0 +1,56 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-image: url('../../images/backgrounds/header_background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.header__content {
+  color: white;
+  max-width: 608px;
+  margin: 80px auto;
+}
+
+.header__title {
+  font-family: 'Roboto-slab',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 60px;
+  line-height: 64px;
+  margin: 0;
+}
+
+.header__subtitle {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 400;
+  margin: 32px 0 0;
+}
+
+@media screen and (max-width:868px) {
+  .header__content {
+    max-width: 452px;
+    margin: 38px auto 48px;
+  }
+
+  .header__title {
+    font-size: 36px;
+    line-height: 40px;
+  }
+
+  .header__subtitle {
+    margin: 16px 0 0;
+  }
+}
+
+@media screen and (max-width:500px) {
+  .header__content {
+    max-width: 288px;
+    margin: 30px auto 32px;
+  }
+}
