@@ -25,6 +25,10 @@
   opacity: 0.2;
 }
 
+.popup__input:focus {
+  border-bottom: solid 2px rgba(0, 162, 255, 0.4);
+}
+
 .popup__input_type_error {
   border-bottom-color:red;
 }
