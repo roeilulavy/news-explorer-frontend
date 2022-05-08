@@ -1,5 +1,5 @@
 .card {
-  max-width: 400px;
+  max-width: 345px;
   background-color: white;
   border-radius: 20px;
   cursor: pointer;
@@ -27,6 +27,14 @@
 
 .card__button_type_save:active {
   background-image: url('../../images/buttons/save_btn_marked.svg');
+}
+
+.card__button_type_save_disabled {
+  background-image: url('../../images/buttons/save_btn_normal.svg');
+}
+
+.card__button_type_save_disabled:hover {
+  background-image: url('../../images/buttons/save_btn_normal.svg');
 }
 
 .card__button_type_save-marked {

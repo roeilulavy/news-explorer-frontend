@@ -1,7 +1,7 @@
 import './NewsCard.css';
 import { useRef } from 'react';
 
-export function NewsCard({ openPage, cardButtonType, cardSpan, cardkeyword, cardImg, cardDate, cardTitle, cardSubtitle, cardCaption }) {
+export function NewsCard({ openPage, isLoggedIn, cardButtonType, cardSpan, cardkeyword, cardImg, cardDate, cardTitle, cardSubtitle, cardCaption }) {
 
   const button = useRef();
   const text = useRef();
@@ -11,7 +11,7 @@ export function NewsCard({ openPage, cardButtonType, cardSpan, cardkeyword, card
 
       <button
         ref={button}
-        className={`card__button_type_${cardButtonType}`}
+        className={`card__button_type_${cardButtonType} ${isLoggedIn === false && 'card__button_type_save_disabled'}`}
         type='button'
         onMouseEnter={() => text.current.style.display = 'block'}
         onMouseLeave={() => text.current.style.display = 'none'}

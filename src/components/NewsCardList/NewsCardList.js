@@ -18,6 +18,7 @@ export function NewsCardList({ isLoggedIn, openPage, isLoading, allArticlesData,
                   {allArticlesData.slice(0, cardsToDisplay).map((card, index) => {
                     return (
                       <NewsCard
+                        isLoggedIn={isLoggedIn}
                         card={card}
                         id={card._id}
                         key={index}
@@ -45,6 +46,7 @@ export function NewsCardList({ isLoggedIn, openPage, isLoading, allArticlesData,
               {savedCardsData.map((card, index) => {
                 return (
                   <NewsCard
+                    isLoggedIn={isLoggedIn}
                     openPage={openPage}
                     card={card}
                     id={card._id}
