@@ -9,7 +9,8 @@ import { SignInPopup } from "../SignInPopup/SignInPopup";
 import { SignUpPopup } from "../SignUpPopup/SignUpPopup";
 import { SuccessPopup } from "../SuccessPopup/SuccessPopup";
 import { FailurePopup } from "../FailurePopup/FailurePopup";
-import { testData } from "../../utils/testData";
+import { date7DaysAgo, currentDate } from "../../utils/constants";
+import NewsApi from "../../utils/NewsApi";
 
 function App() {
   const [success, setSuccess] = useState(false);
@@ -29,6 +30,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   
   const [cards, setCards] = useState([]);
+  const [allArticlesData, setAllArticlesData] = useState([]);
   const [cardsToDisplay, setCardsToDisplay] = useState(3);
   const [savedCardsData, setSavedCardsData] = useState([]);
 
@@ -60,25 +62,31 @@ function App() {
     document.addEventListener("keydown", closeByEscape);
     return () => document.removeEventListener("keydown", closeByEscape);
   }, []);
-
-  
-  React.useEffect(() => {
-    setSavedCardsData(testData);
-  }, [])
   
   React.useEffect(() => {
     setIsSearchResultOpen(false);
     setCardsToDisplay(3)
   }, [openPage]);
 
-  function handleSearch() {
+  async function handleSearch(keyword) {
     setIsSearchResultOpen(true);
     setIsLoading(true);
-    
-    setTimeout(() => {
-      setCards(testData);
+    setCardsToDisplay(3);
+
+    try {
+      const articles = await NewsApi.getArticles(keyword, date7DaysAgo, currentDate);
+
+      if (articles) {
+        const allArticles = articles.articles;
+        localStorage.setItem('articles', JSON.stringify(allArticles));
+        setAllArticlesData(allArticles);
+      }
+    } catch (err) {
+      //Add Error Handler
+      setAllArticlesData([]);
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   }
 
   const showMore = () => {
@@ -114,7 +122,7 @@ function App() {
                   setOpenPage={setOpenPage}
                   onSearch={handleSearch}
                   isLoading={isLoading}
-                  cards={cards}
+                  allArticlesData={allArticlesData}
                   cardsToDisplay={cardsToDisplay}
                   savedCardsData={savedCardsData}
                   showMore={showMore}

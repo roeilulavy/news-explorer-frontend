@@ -3,7 +3,7 @@ import { About } from "../About/About";
 import { NewsCardList } from "../NewsCardList/NewsCardList";
 import React from "react";
 
-export function Main({ isLoggedIn, handleLogout, setOpenPage, onSearch, cards, cardsToDisplay, savedCardsData, showMore, isSearchResultOpen, isLoading, handleSigninPopup }) {
+export function Main({ isLoggedIn, handleLogout, setOpenPage, onSearch, allArticlesData, cardsToDisplay, savedCardsData, showMore, isSearchResultOpen, isLoading, handleSigninPopup }) {
 
   React.useEffect(() => {
     setOpenPage('Home')
@@ -25,7 +25,7 @@ export function Main({ isLoggedIn, handleLogout, setOpenPage, onSearch, cards, c
           isLoggedIn={isLoggedIn}
           openPage={'Home'}
           isLoading={isLoading}
-          cards={cards}
+          allArticlesData={allArticlesData}
           cardsToDisplay={cardsToDisplay}
           savedCardsData={savedCardsData}
           showMore={showMore}

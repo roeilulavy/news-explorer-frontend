@@ -19,7 +19,7 @@ function getDateDaysAgo(days) {
   return `${date.getFullYear()}-${month}-${day}`;
 }
 
-function handleChageDateFormat(date) {
+function handelFormat(date) {
   let dateOfArticle = [...date.slice(0, 10)];
 
   dateOfArticle = dateOfArticle.filter((item) => {
@@ -42,4 +42,4 @@ function handleChageDateFormat(date) {
 
 const date7DaysAgo = getDateDaysAgo(7);
 
-export { currentDate, date7DaysAgo, handleChageDateFormat };
+export { currentDate, date7DaysAgo, handelFormat };
