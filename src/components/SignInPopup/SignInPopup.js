@@ -16,7 +16,7 @@ export function SignInPopup({ isOpen, onClose, onSignIn, handleSignupPopup }) {
     if (!email || !password) {
       return;
     }
-    onSignIn({ email, password });
+    onSignIn(email, password);
   };
 
   return (

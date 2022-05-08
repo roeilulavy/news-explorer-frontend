@@ -1,6 +1,7 @@
 import './Navigation.css';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router';
+import CurrentUserContext from "../../context/CurrentUserContext";
 import LogoutIconWhite from '../../images/buttons/logout_icon_white.svg';
 import LogoutIconBlack from '../../images/buttons/logout_icon_black.svg';
 import MenuIconWhite from '../../images/buttons/menu_white_icon.svg';
@@ -8,6 +9,7 @@ import MenuIconBlack from '../../images/buttons/menu_black_icon.svg';
 import CloseIconWhite from '../../images/buttons/close_white_icon.svg';
 
 export function Navigation ({ isLoggedIn, openPage, setOpenPage, handleLogout, handleSigninPopup }) {
+  const currentUser = useContext(CurrentUserContext);
   const navigation = useNavigate()
   const [darkNav, setDarkNav] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -77,7 +79,7 @@ export function Navigation ({ isLoggedIn, openPage, setOpenPage, handleLogout, h
           Saved articles
           </li>
           <li className={`navigation__logout ${darkNav && 'navigation__logout-dark'}`} onClick={handleLogout}>
-            User
+            {currentUser.email}
             <img src={darkNav ? LogoutIconBlack : LogoutIconWhite} alt='Log out'/>
           </li>
         </>

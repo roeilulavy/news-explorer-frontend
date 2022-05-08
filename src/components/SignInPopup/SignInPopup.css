@@ -26,7 +26,7 @@
 }
 
 .popup__input:focus {
-  border-bottom: solid 2px rgba(0, 162, 255, 0.4);
+  border-bottom: solid 2px rgb(0, 0, 0);
 }
 
 .popup__input_type_error {

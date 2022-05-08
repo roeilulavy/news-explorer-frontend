@@ -11,24 +11,25 @@ import { SuccessPopup } from "../SuccessPopup/SuccessPopup";
 import { FailurePopup } from "../FailurePopup/FailurePopup";
 import { date7DaysAgo, currentDate } from "../../utils/constants";
 import NewsApi from "../../utils/NewsApi";
+import * as auth from "../../utils/MainApi";
+import CurrentUserContext from "../../context/CurrentUserContext";
 
 function App() {
-  const [success, setSuccess] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
   const token = localStorage.getItem("jwt");
 
   const [currentUser, setCurrentUser] = useState({});
-  
-  const [openPage, setOpenPage] = useState('');
+
+  const [openPage, setOpenPage] = useState("");
   const [isSearchResultOpen, setIsSearchResultOpen] = useState(false);
-  
+
   const [isSignInPopup, setIsSignInPopup] = useState(false);
   const [isSignUpPopup, setIsSignUpPopup] = useState(false);
   const [isSuccessPopup, setIsSuccessPopup] = useState(false);
   const [isFailurePopup, setIsFailurePopup] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const [searchError, setSearchError] = useState(false);
   const [allArticlesData, setAllArticlesData] = useState([]);
   const [cardsToDisplay, setCardsToDisplay] = useState(3);
@@ -36,22 +37,87 @@ function App() {
 
   const navigation = useNavigate();
 
+  const onSignUp = (email, password, username) => {
+    auth.signup(email, password, username).then(() => {
+        setIsSignUpPopup(false);
+        setIsSuccessPopup(true);
+      })
+      .catch((err) => {
+        console.error(err);
+        setIsSignUpPopup(false);
+        setIsFailurePopup(true);
+      });
+  };
+
   const onLogin = (email, password) => {
-    closeAllPopups();
-    setIsLoggedIn(true);
+    auth.signin(email, password).then((data) => {      
+        if (data) {
+          const userData = {
+            email: email,
+            token: data,
+          };
+
+          console.log('UserData : ' + userData)
+
+          setUserData(userData);
+          setIsLoggedIn(true);
+          setIsSignInPopup(false);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        setIsSignInPopup(false);
+        setIsFailurePopup(true);
+      });
   };
 
   const onLogout = () => {
+    localStorage.removeItem("jwt");
+    setUserData({});
+    setCurrentUser({});
     setIsLoggedIn(false);
-    setOpenPage('Home')
-    navigation('/')
+    setOpenPage("Home");
+    navigation("/");
   };
 
-  const onSignUp = () => {
-    closeAllPopups();
-    setSuccess(true);
-    setIsSuccessPopup(true);
-  };
+  React.useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+    console.log('JWT : ' + jwt);
+    if (jwt) {
+      auth.checkToken(jwt).then((res) => {
+          if (res) {
+            setUserData(res);
+            setIsLoggedIn(true);
+          }
+        }).catch((err) => console.error(err));
+    } 
+    else {
+      console.log('There is no JWT')
+    }
+  },[]);
+
+  React.useEffect(() => {
+    if (isLoggedIn) {
+      console.log('Token : ' + token)
+      async function getUserData() {
+        try {
+          const userInfo = await auth.getUserData(token);
+
+          if (userInfo) {
+            setCurrentUser(userInfo);
+          }
+        } catch (error) {
+          console.error("Error! ", error);
+          alert("Something went wrong getting user data..");
+        } 
+      }
+
+      getUserData();
+
+    } else {
+      navigation("/");
+    }
+  }, [isLoggedIn, navigation, token]);
 
   React.useEffect(() => {
     const closeByEscape = (e) => {
@@ -62,10 +128,10 @@ function App() {
     document.addEventListener("keydown", closeByEscape);
     return () => document.removeEventListener("keydown", closeByEscape);
   }, []);
-  
+
   React.useEffect(() => {
     setIsSearchResultOpen(false);
-    setCardsToDisplay(3)
+    setCardsToDisplay(3);
   }, [openPage]);
 
   async function handleSearch(keyword) {
@@ -74,16 +140,20 @@ function App() {
     setCardsToDisplay(3);
 
     try {
-      const articles = await NewsApi.getArticles(keyword, date7DaysAgo, currentDate);
+      const articles = await NewsApi.getArticles(
+        keyword,
+        date7DaysAgo,
+        currentDate
+      );
 
       if (articles) {
         const allArticles = articles.articles;
-        localStorage.setItem('searchKeyword', keyword);
-        localStorage.setItem('articles', JSON.stringify(allArticles));
+        localStorage.setItem("searchKeyword", keyword);
+        localStorage.setItem("articles", JSON.stringify(allArticles));
         setAllArticlesData(allArticles);
       }
     } catch (err) {
-      setSearchError(true)
+      setSearchError(true);
       setAllArticlesData([]);
     } finally {
       setIsLoading(false);
@@ -112,9 +182,12 @@ function App() {
   }
 
   return (
+    <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
         <Routes>
-          <Route path="/" element={
+          <Route
+            path="/"
+            element={
               <>
                 <Main
                   isLoggedIn={isLoggedIn}
@@ -146,13 +219,13 @@ function App() {
                   onSignUp={onSignUp}
                 />
 
-                <SuccessPopup 
+                <SuccessPopup
                   isOpen={isSuccessPopup}
                   onClose={closeAllPopups}
                   handleSigninPopup={handleSigninPopup}
                 />
 
-                <FailurePopup 
+                <FailurePopup
                   isOpen={isFailurePopup}
                   onClose={closeAllPopups}
                 />
@@ -160,8 +233,10 @@ function App() {
             }
           />
 
-          <Route path="/saved-news" element={
-              <SavedNews 
+          <Route
+            path="/saved-news"
+            element={
+              <SavedNews
                 isLoggedIn={isLoggedIn}
                 handleLogout={onLogout}
                 openPage={openPage}
@@ -175,6 +250,7 @@ function App() {
         </Routes>
         <Footer />
       </div>
+    </CurrentUserContext.Provider>
   );
 }
 

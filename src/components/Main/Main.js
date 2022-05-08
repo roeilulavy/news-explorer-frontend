@@ -1,7 +1,7 @@
+import React from "react";
 import { Header } from "../Header/Header";
 import { About } from "../About/About";
 import { NewsCardList } from "../NewsCardList/NewsCardList";
-import React from "react";
 
 export function Main({ isLoggedIn, handleLogout, setOpenPage, onSearch, allArticlesData, cardsToDisplay, savedCardsData, showMore, isSearchResultOpen, isLoading, handleSigninPopup, searchError }) {
 
