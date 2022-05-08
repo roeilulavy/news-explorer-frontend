@@ -17,9 +17,10 @@ import CurrentUserContext from "../../context/CurrentUserContext";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
+  const [currentUser, setCurrentUser] = useState({});
   const token = localStorage.getItem("jwt");
 
-  const [currentUser, setCurrentUser] = useState({});
+  // ------------------***** Delete all userData, setUserData and replace with currentUser  *****--------------------------------
 
   const [openPage, setOpenPage] = useState("");
   const [isSearchResultOpen, setIsSearchResultOpen] = useState(false);

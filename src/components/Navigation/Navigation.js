@@ -79,7 +79,7 @@ export function Navigation ({ isLoggedIn, openPage, setOpenPage, handleLogout, h
           Saved articles
           </li>
           <li className={`navigation__logout ${darkNav && 'navigation__logout-dark'}`} onClick={handleLogout}>
-            {currentUser.email}
+            {currentUser.name}
             <img src={darkNav ? LogoutIconBlack : LogoutIconWhite} alt='Log out'/>
           </li>
         </>
