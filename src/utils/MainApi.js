@@ -2,10 +2,9 @@ export const BASE_URL = 'https://api.roy.news.students.nomoreparties.sbs';
 
 function checkResponse(response) {
   if (response.ok) {
-    console.log(response);
     return response.json();
   }
-  console.error("Error! : " + response.status +" "+ response.text);
+  console.error("Error: " + response.status +" "+ response.text);
   return Promise.reject(response.status);
 }
 
@@ -40,7 +39,6 @@ export const signin = (email, password) => {
   .then((data) => {
     if (data) {
       localStorage.setItem("jwt", data.token);
-      console.log(data.token)
       return data;
     }
   })

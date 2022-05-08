@@ -56,9 +56,6 @@ function App() {
             email: email,
             token: data,
           };
-
-          console.log('UserData : ' + userData)
-
           setUserData(userData);
           setIsLoggedIn(true);
           setIsSignInPopup(false);
@@ -82,7 +79,6 @@ function App() {
 
   React.useEffect(() => {
     const jwt = localStorage.getItem("jwt");
-    console.log('JWT : ' + jwt);
     if (jwt) {
       auth.checkToken(jwt).then((res) => {
           if (res) {
@@ -98,7 +94,6 @@ function App() {
 
   React.useEffect(() => {
     if (isLoggedIn) {
-      console.log('Token : ' + token)
       async function getUserData() {
         try {
           const userInfo = await auth.getUserData(token);
