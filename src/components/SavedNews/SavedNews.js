@@ -22,7 +22,6 @@ export function SavedNews({ isLoggedIn, handleLogout, setOpenPage, savedCardsDat
         isLoggedIn={isLoggedIn}
         openPage={'Saved-news'}
         savedCardsData={savedCardsData}
-        text={''}
       />
     </div>
   )

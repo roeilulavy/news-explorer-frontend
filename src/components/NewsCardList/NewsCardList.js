@@ -4,14 +4,14 @@ import { NewsCard } from '../NewsCard/NewsCard'
 import { NotFound } from '../NotFound/NotFound'
 import { handelFormat } from '../../utils/constants';
 
-export function NewsCardList({ isLoggedIn, openPage, isLoading, allArticlesData, cardsToDisplay, savedCardsData, text, showMore }) {
+export function NewsCardList({ isLoggedIn, openPage, isLoading, allArticlesData, cardsToDisplay, savedCardsData, showMore, searchError }) {
 
   return (
     <section className='cards'>
       {isLoading ? 
         <PreLoader />
         :
-          openPage === 'Home' && allArticlesData ?
+          openPage === 'Home' && allArticlesData.length !== 0 ?
             <>
               <h2 className='cards__title'>Search Result</h2>
                 <div className='cards__wrapper'>
@@ -40,7 +40,7 @@ export function NewsCardList({ isLoggedIn, openPage, isLoading, allArticlesData,
                 }
             </>
         :
-          openPage === 'Saved-news' && savedCardsData ?
+          openPage === 'Saved-news' && savedCardsData.length !== 0 ?
             <div className='cards__wrapper'>
               {savedCardsData.map((card, index) => {
                 return (
@@ -65,11 +65,8 @@ export function NewsCardList({ isLoggedIn, openPage, isLoading, allArticlesData,
         :
         <>
           <NotFound
-            text={text}
-          />
-          
-          {console.log('openPage: '+openPage + ' || Saved Cards Data'+savedCardsData)}
-          
+            text={openPage === 'Home' ? searchError === true ? 'Sorry, something went wrong during the request. There may be a connection issue or the server may be down. Please try again later.' : 'Sorry, but nothing matched your search terms.' : openPage === 'Saved-news' && 'You don`t have any saved articles yet.'}
+          />          
         </>
       }
     </section>

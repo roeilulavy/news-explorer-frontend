@@ -29,7 +29,7 @@ function App() {
   const [isFailurePopup, setIsFailurePopup] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   
-  const [cards, setCards] = useState([]);
+  const [searchError, setSearchError] = useState(false);
   const [allArticlesData, setAllArticlesData] = useState([]);
   const [cardsToDisplay, setCardsToDisplay] = useState(3);
   const [savedCardsData, setSavedCardsData] = useState([]);
@@ -78,11 +78,12 @@ function App() {
 
       if (articles) {
         const allArticles = articles.articles;
+        localStorage.setItem('searchKeyword', keyword);
         localStorage.setItem('articles', JSON.stringify(allArticles));
         setAllArticlesData(allArticles);
       }
     } catch (err) {
-      //Add Error Handler
+      setSearchError(true)
       setAllArticlesData([]);
     } finally {
       setIsLoading(false);
@@ -126,6 +127,7 @@ function App() {
                   cardsToDisplay={cardsToDisplay}
                   savedCardsData={savedCardsData}
                   showMore={showMore}
+                  searchError={searchError}
                   isSearchResultOpen={isSearchResultOpen}
                   handleSigninPopup={handleSigninPopup}
                 />
