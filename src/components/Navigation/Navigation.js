@@ -9,8 +9,10 @@ import MenuIconBlack from '../../images/buttons/menu_black_icon.svg';
 import CloseIconWhite from '../../images/buttons/close_white_icon.svg';
 
 export function Navigation ({ isLoggedIn, openPage, setOpenPage, handleLogout, handleSigninPopup }) {
+
   const currentUser = useContext(CurrentUserContext);
-  const navigation = useNavigate()
+  const navigation = useNavigate();
+
   const [darkNav, setDarkNav] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -55,7 +57,7 @@ export function Navigation ({ isLoggedIn, openPage, setOpenPage, handleLogout, h
                   Saved articles
                   </li>
                   <li className='navigation__content__button' onClick={handleLogout}>
-                    User
+                    {currentUser.name}
                     <img src={LogoutIconWhite} alt='Log out'/>
                   </li>
                 </>

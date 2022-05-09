@@ -16,11 +16,8 @@ import CurrentUserContext from "../../context/CurrentUserContext";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData] = useState({});
   const [currentUser, setCurrentUser] = useState({});
   const token = localStorage.getItem("jwt");
-
-  // ------------------***** Delete all userData, setUserData and replace with currentUser  *****--------------------------------
 
   const [openPage, setOpenPage] = useState("");
   const [isSearchResultOpen, setIsSearchResultOpen] = useState(false);
@@ -57,7 +54,7 @@ function App() {
             email: email,
             token: data,
           };
-          setUserData(userData);
+          setCurrentUser(userData);
           setIsLoggedIn(true);
           setIsSignInPopup(false);
         }
@@ -71,7 +68,6 @@ function App() {
 
   const onLogout = () => {
     localStorage.removeItem("jwt");
-    setUserData({});
     setCurrentUser({});
     setIsLoggedIn(false);
     setOpenPage("Home");
@@ -83,7 +79,7 @@ function App() {
     if (jwt) {
       auth.checkToken(jwt).then((res) => {
           if (res) {
-            setUserData(res);
+            setCurrentUser(res);
             setIsLoggedIn(true);
           }
         }).catch((err) => console.error(err));
