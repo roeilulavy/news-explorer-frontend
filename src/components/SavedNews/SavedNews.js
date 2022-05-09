@@ -2,7 +2,7 @@ import { SavedNewsHeader } from '../SavedNewsHeader/SavedNewsHeader';
 import { NewsCardList } from '../NewsCardList/NewsCardList';
 import React from 'react';
 
-export function SavedNews({ isLoggedIn, handleLogout, setOpenPage, savedCardsData, handleDeleteArticle }) {
+export function SavedNews({ isLoggedIn, handleLogout, setOpenPage, savedCardsData, handleDeleteArticle, operationSuccess }) {
 
   React.useEffect(() => {
     setOpenPage('Saved-news')
@@ -23,6 +23,7 @@ export function SavedNews({ isLoggedIn, handleLogout, setOpenPage, savedCardsDat
         openPage={'Saved-news'}
         savedCardsData={savedCardsData}
         handleDeleteArticle={handleDeleteArticle}
+        operationSuccess={operationSuccess}
       />
     </div>
   )

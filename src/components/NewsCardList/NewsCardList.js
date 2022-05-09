@@ -4,7 +4,7 @@ import { NewsCard } from '../NewsCard/NewsCard'
 import { NotFound } from '../NotFound/NotFound'
 import { handelFormat } from '../../utils/constants';
 
-export function NewsCardList({ isLoggedIn, openPage, isLoading, allArticlesData, cardsToDisplay, savedCardsData, showMore, searchError, handleSigninPopup, handleSaveArticle, handleDeleteArticle }) {
+export function NewsCardList({ isLoggedIn, openPage, isLoading, allArticlesData, cardsToDisplay, savedCardsData, showMore, searchError, handleSigninPopup, handleSaveArticle, handleDeleteArticle, operationSuccess }) {
 
   return (
     <section className='cards'>
@@ -31,12 +31,12 @@ export function NewsCardList({ isLoggedIn, openPage, isLoading, allArticlesData,
                         cardCaption={card.source.name}
                         cardLink={card.url}
 
-                        cardButtonType={'save'}
                         cardSpan={isLoggedIn ? 'Add to saved' : 'Sign in to save articles'}
 
                         handleSigninPopup={handleSigninPopup}
                         handleSaveArticle={handleSaveArticle}
                         handleDeleteArticle={handleDeleteArticle}
+                        operationSuccess={operationSuccess}
                         />
                     )
                   })}
@@ -65,11 +65,11 @@ export function NewsCardList({ isLoggedIn, openPage, isLoading, allArticlesData,
                     cardCaption={card.source}
                     cardLink={card.link}
                     cardkeyword={card.keyword}
-                    
-                    cardButtonType={'trash'}
+
                     cardSpan={'Remove from save'}
 
                     handleDeleteArticle={handleDeleteArticle}
+                    operationSuccess={operationSuccess}
                     />
                 )
               })}

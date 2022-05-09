@@ -34,6 +34,7 @@ function App() {
   const [allArticlesData, setAllArticlesData] = useState([]);
   const [cardsToDisplay, setCardsToDisplay] = useState(3);
   const [savedCardsData, setSavedCardsData] = useState([]);
+  const [operationSuccess, setOperationSuccess] = useState(false);
 
   const navigation = useNavigate();
 
@@ -209,6 +210,7 @@ function App() {
 
       if(savedArticle) {
         setSavedCardsData([savedArticle, ...savedCardsData])
+        setOperationSuccess(true);
       }
     } catch (err) {
       alert('something went wrong while save the article')
@@ -223,6 +225,7 @@ function App() {
       if (articleToDelete) {
         const filterList = savedCardsData.filter((item) => item._id !== articleToDelete._id);
         setSavedCardsData(filterList);
+        setOperationSuccess(true);
       }
     } catch (err) {
       console.error(err);
@@ -253,6 +256,7 @@ function App() {
                   handleSigninPopup={handleSigninPopup}
                   handleSaveArticle={handleSaveArticle}
                   handleDeleteArticle={handleDeleteArticle}
+                  operationSuccess={operationSuccess}
                 />
 
                 <SignInPopup
@@ -293,6 +297,7 @@ function App() {
                 setOpenPage={setOpenPage}
                 savedCardsData={savedCardsData}
                 handleDeleteArticle={handleDeleteArticle}
+                operationSuccess={operationSuccess}
               />
             }
           />
