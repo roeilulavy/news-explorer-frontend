@@ -2,6 +2,7 @@ import "./App.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { Routes, Route, Navigate } from "react-router-dom";
+import uuid from 'react-uuid';
 import { Main } from "../Main/Main";
 import { SavedNews } from "../SavedNews/SavedNews";
 import { Footer } from "../Footer/Footer";
@@ -28,6 +29,7 @@ function App() {
   const [isFailurePopup, setIsFailurePopup] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  const [searchKeyword, setSearchKeyword] = useState('');
   const [searchError, setSearchError] = useState(false);
   const [allArticlesData, setAllArticlesData] = useState([]);
   const [cardsToDisplay, setCardsToDisplay] = useState(3);
@@ -104,7 +106,20 @@ function App() {
         } 
       }
 
+      async function getSavedArticles() {
+        try {
+          const savedArticles = await auth.getSavedArticles(token);
+
+          if (savedArticles) {
+            setSavedCardsData(savedArticles);
+          }
+        } catch (err) {
+          console.error(err);
+        }
+      }
+
       getUserData();
+      getSavedArticles();
 
     } else {
       navigation("/");
@@ -122,11 +137,14 @@ function App() {
   }, []);
 
   React.useEffect(() => {
+    setSearchKeyword('');
     setIsSearchResultOpen(false);
     setCardsToDisplay(3);
   }, [openPage]);
 
   async function handleSearch(keyword) {
+    setSearchKeyword('');
+    setSearchKeyword(keyword);
     setIsSearchResultOpen(true);
     setIsLoading(true);
     setCardsToDisplay(3);
@@ -142,7 +160,19 @@ function App() {
         const allArticles = articles.articles;
         localStorage.setItem("searchKeyword", keyword);
         localStorage.setItem("articles", JSON.stringify(allArticles));
-        setAllArticlesData(allArticles);
+
+        let cardsWithId = [];
+        let card;
+
+        for (let i = 0; i <= allArticles.length; i++) {
+          if (allArticles[i]) {
+            card = {...allArticles[i], id: uuid()};
+            cardsWithId.push(card);
+          }
+        }
+
+        localStorage.setItem("articlesWithId", JSON.stringify(cardsWithId));
+        setAllArticlesData(cardsWithId);
       }
     } catch (err) {
       setSearchError(true);
@@ -173,6 +203,32 @@ function App() {
     setIsFailurePopup(false);
   }
 
+  async function handleSaveArticle(title, subtitle, date, source, link, image) {
+    try {
+      const savedArticle = await auth.saveArticle(searchKeyword, title, subtitle, date, source, link, image, token);
+
+      if(savedArticle) {
+        setSavedCardsData([savedArticle, ...savedCardsData])
+      }
+    } catch (err) {
+      alert('something went wrong while save the article')
+      console.log(err)
+    }
+  }
+
+  async function handleDeleteArticle(cardId) {
+    try {
+      const articleToDelete = await auth.deleteArticle(token, cardId);
+
+      if (articleToDelete) {
+        const filterList = savedCardsData.filter((item) => item._id !== articleToDelete._id);
+        setSavedCardsData(filterList);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
@@ -195,6 +251,8 @@ function App() {
                   searchError={searchError}
                   isSearchResultOpen={isSearchResultOpen}
                   handleSigninPopup={handleSigninPopup}
+                  handleSaveArticle={handleSaveArticle}
+                  handleDeleteArticle={handleDeleteArticle}
                 />
 
                 <SignInPopup
@@ -234,6 +292,7 @@ function App() {
                 openPage={openPage}
                 setOpenPage={setOpenPage}
                 savedCardsData={savedCardsData}
+                handleDeleteArticle={handleDeleteArticle}
               />
             }
           />

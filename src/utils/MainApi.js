@@ -70,7 +70,7 @@ export const getUserData = (token) => {
   .then(checkResponse);
 }
 
-export const saveArticle = (keyWord, title, text, date, source, link, image, token) => {
+export const saveArticle = (keyWord, title, subtitle, date, source, link, image, token) => {
   return fetch(`${BASE_URL}/articles`, {
     method: 'POST',
     headers: {
@@ -80,7 +80,7 @@ export const saveArticle = (keyWord, title, text, date, source, link, image, tok
     body: JSON.stringify({
       "keyword": keyWord,
       "title": title,
-      "text": text,
+      "text": subtitle,
       "date": date,
       "source": source,
       "link": link,

@@ -4,7 +4,7 @@ import { NewsCard } from '../NewsCard/NewsCard'
 import { NotFound } from '../NotFound/NotFound'
 import { handelFormat } from '../../utils/constants';
 
-export function NewsCardList({ isLoggedIn, openPage, isLoading, allArticlesData, cardsToDisplay, savedCardsData, showMore, searchError }) {
+export function NewsCardList({ isLoggedIn, openPage, isLoading, allArticlesData, cardsToDisplay, savedCardsData, showMore, searchError, handleSigninPopup, handleSaveArticle, handleDeleteArticle }) {
 
   return (
     <section className='cards'>
@@ -19,6 +19,8 @@ export function NewsCardList({ isLoggedIn, openPage, isLoading, allArticlesData,
                     return (
                       <NewsCard
                         isLoggedIn={isLoggedIn}
+                        openPage={openPage}
+
                         card={card}
                         id={card._id}
                         key={index}
@@ -28,9 +30,13 @@ export function NewsCardList({ isLoggedIn, openPage, isLoading, allArticlesData,
                         cardSubtitle={card.description}
                         cardCaption={card.source.name}
                         cardLink={card.url}
+
                         cardButtonType={'save'}
                         cardSpan={isLoggedIn ? 'Add to saved' : 'Sign in to save articles'}
-                        cardkeyword={card.keyword} 
+
+                        handleSigninPopup={handleSigninPopup}
+                        handleSaveArticle={handleSaveArticle}
+                        handleDeleteArticle={handleDeleteArticle}
                         />
                     )
                   })}
@@ -48,18 +54,22 @@ export function NewsCardList({ isLoggedIn, openPage, isLoading, allArticlesData,
                   <NewsCard
                     isLoggedIn={isLoggedIn}
                     openPage={openPage}
+
                     card={card}
                     id={card._id}
                     key={index}
-                    cardImg={card.urlToImage}
-                    cardDate={handelFormat(card.publishedAt)}
+                    cardImg={card.image}
+                    cardDate={card.date}
                     cardTitle={card.title}
-                    cardSubtitle={card.description}
-                    cardCaption={card.source.name}
-                    cardLink={card.url}
+                    cardSubtitle={card.text}
+                    cardCaption={card.source}
+                    cardLink={card.link}
+                    cardkeyword={card.keyword}
+                    
                     cardButtonType={'trash'}
                     cardSpan={'Remove from save'}
-                    cardkeyword={card.keyword}
+
+                    handleDeleteArticle={handleDeleteArticle}
                     />
                 )
               })}
