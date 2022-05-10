@@ -3,7 +3,7 @@ import { Header } from "../Header/Header";
 import { About } from "../About/About";
 import { NewsCardList } from "../NewsCardList/NewsCardList";
 
-export function Main({ isLoggedIn, handleLogout, setOpenPage, onSearch, allArticlesData, cardsToDisplay, savedCardsData, showMore, isSearchResultOpen, isLoading, handleSigninPopup, searchError, handleSaveArticle, handleDeleteArticle, operationSuccess }) {
+export function Main({ isLoggedIn, handleLogout, setOpenPage, onSearch, allArticlesData, cardsToDisplay, savedCardsData, showMore, isSearchResultOpen, isLoading, handleSigninPopup, searchError, handleSaveArticle, handleDeleteArticle, operationSuccess, setOperationSuccess }) {
 
   React.useEffect(() => {
     setOpenPage('Home')
@@ -34,6 +34,7 @@ export function Main({ isLoggedIn, handleLogout, setOpenPage, onSearch, allArtic
           handleSaveArticle={handleSaveArticle}
           handleDeleteArticle={handleDeleteArticle}
           operationSuccess={operationSuccess}
+          setOperationSuccess={setOperationSuccess}
         />}
 
       <About />

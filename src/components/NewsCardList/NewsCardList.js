@@ -4,7 +4,7 @@ import { NewsCard } from '../NewsCard/NewsCard'
 import { NotFound } from '../NotFound/NotFound'
 import { handelFormat } from '../../utils/constants';
 
-export function NewsCardList({ isLoggedIn, openPage, isLoading, allArticlesData, cardsToDisplay, savedCardsData, showMore, searchError, handleSigninPopup, handleSaveArticle, handleDeleteArticle, operationSuccess }) {
+export function NewsCardList({ isLoggedIn, openPage, isLoading, allArticlesData, cardsToDisplay, savedCardsData, showMore, searchError, handleSigninPopup, handleSaveArticle, handleDeleteArticle, operationSuccess, setOperationSuccess }) {
 
   return (
     <section className='cards'>
@@ -37,6 +37,8 @@ export function NewsCardList({ isLoggedIn, openPage, isLoading, allArticlesData,
                         handleSaveArticle={handleSaveArticle}
                         handleDeleteArticle={handleDeleteArticle}
                         operationSuccess={operationSuccess}
+                        setOperationSuccess={setOperationSuccess}
+                        savedCardsData={savedCardsData}
                         />
                     )
                   })}

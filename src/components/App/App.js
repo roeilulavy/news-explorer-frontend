@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Routes, Route, Navigate } from "react-router-dom";
 import uuid from 'react-uuid';
@@ -15,7 +15,7 @@ import NewsApi from "../../utils/NewsApi";
 import * as auth from "../../utils/MainApi";
 import CurrentUserContext from "../../context/CurrentUserContext";
 
-function App() {
+export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const token = localStorage.getItem("jwt");
@@ -37,6 +37,108 @@ function App() {
   const [operationSuccess, setOperationSuccess] = useState(false);
 
   const navigation = useNavigate();
+
+  //Close by Esc
+  React.useEffect(() => {
+    const closeByEscape = (e) => {
+      if (e.key === "Escape") {
+        closeAllPopups();
+      }
+    };
+    document.addEventListener("keydown", closeByEscape);
+    return () => document.removeEventListener("keydown", closeByEscape);
+  }, []);
+
+  //Get JWT
+  React.useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      auth.checkToken(jwt).then((res) => {
+          if (res) {
+            async function getUserData() {
+              try {
+                const userInfo = await auth.getUserData(token);
+      
+                if (userInfo) {
+                  setCurrentUser(userInfo);
+                }
+              } catch (error) {
+                console.error("Error! ", error);
+                alert("Something went wrong getting user data..");
+              } 
+            }
+
+            async function getSavedArticles() {
+              try {
+                const savedArticles = await auth.getSavedArticles(token);
+      
+                if (savedArticles) {
+                  setSavedCardsData(savedArticles);
+                }
+              } catch (err) {
+                console.error(err);
+              }
+            }
+
+            getUserData();
+            getSavedArticles();
+            setIsLoggedIn(true);
+          }
+        }).catch((err) => console.error(err));
+    }
+    else {
+      console.log('There is no JWT');
+      navigation("/");
+    }
+  },[navigation, token]);
+
+  // React.useEffect(() => {
+  //   if (isLoggedIn) {
+  //     async function getUserData() {
+  //       try {
+  //         const userInfo = await auth.getUserData(token);
+
+  //         if (userInfo) {
+  //           setCurrentUser(userInfo);
+  //         }
+  //       } catch (error) {
+  //         console.error("Error! ", error);
+  //         alert("Something went wrong getting user data..");
+  //       } 
+  //     }
+
+  //     async function getSavedArticles() {
+  //       try {
+  //         const savedArticles = await auth.getSavedArticles(token);
+
+  //         if (savedArticles) {
+  //           setSavedCardsData(savedArticles);
+  //         }
+  //       } catch (err) {
+  //         console.error(err);
+  //       }
+  //     }
+
+  //     getUserData();
+  //     getSavedArticles();
+
+  //   } else {
+  //     navigation("/");
+  //   }
+  // }, [isLoggedIn, navigation, token]);
+
+  //On savedCardsData Change
+  
+  useEffect(() => {
+    console.log(savedCardsData)
+  },[savedCardsData])
+
+  //Reset SearchForm
+  React.useEffect(() => {
+    setSearchKeyword('');
+    setIsSearchResultOpen(false);
+    setCardsToDisplay(3);
+  }, [openPage]);
 
   const onSignUp = (email, password, username) => {
     auth.signup(email, password, username).then(() => {
@@ -76,72 +178,6 @@ function App() {
     setOpenPage("Home");
     navigation("/");
   };
-
-  React.useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      auth.checkToken(jwt).then((res) => {
-          if (res) {
-            setCurrentUser(res);
-            setIsLoggedIn(true);
-          }
-        }).catch((err) => console.error(err));
-    } 
-    else {
-      console.log('There is no JWT')
-    }
-  },[]);
-
-  React.useEffect(() => {
-    if (isLoggedIn) {
-      async function getUserData() {
-        try {
-          const userInfo = await auth.getUserData(token);
-
-          if (userInfo) {
-            setCurrentUser(userInfo);
-          }
-        } catch (error) {
-          console.error("Error! ", error);
-          alert("Something went wrong getting user data..");
-        } 
-      }
-
-      async function getSavedArticles() {
-        try {
-          const savedArticles = await auth.getSavedArticles(token);
-
-          if (savedArticles) {
-            setSavedCardsData(savedArticles);
-          }
-        } catch (err) {
-          console.error(err);
-        }
-      }
-
-      getUserData();
-      getSavedArticles();
-
-    } else {
-      navigation("/");
-    }
-  }, [isLoggedIn, navigation, token]);
-
-  React.useEffect(() => {
-    const closeByEscape = (e) => {
-      if (e.key === "Escape") {
-        closeAllPopups();
-      }
-    };
-    document.addEventListener("keydown", closeByEscape);
-    return () => document.removeEventListener("keydown", closeByEscape);
-  }, []);
-
-  React.useEffect(() => {
-    setSearchKeyword('');
-    setIsSearchResultOpen(false);
-    setCardsToDisplay(3);
-  }, [openPage]);
 
   async function handleSearch(keyword) {
     setSearchKeyword('');
@@ -209,12 +245,12 @@ function App() {
       const savedArticle = await auth.saveArticle(searchKeyword, title, subtitle, date, source, link, image, token);
 
       if(savedArticle) {
-        setSavedCardsData([savedArticle, ...savedCardsData])
+        setSavedCardsData([savedArticle, ...savedCardsData]);
         setOperationSuccess(true);
       }
     } catch (err) {
-      alert('something went wrong while save the article')
-      console.log(err)
+      alert('something went wrong while save the article');
+      console.log(err);
     }
   }
 
@@ -257,6 +293,7 @@ function App() {
                   handleSaveArticle={handleSaveArticle}
                   handleDeleteArticle={handleDeleteArticle}
                   operationSuccess={operationSuccess}
+                  setOperationSuccess={setOperationSuccess}
                 />
 
                 <SignInPopup
@@ -297,7 +334,6 @@ function App() {
                 setOpenPage={setOpenPage}
                 savedCardsData={savedCardsData}
                 handleDeleteArticle={handleDeleteArticle}
-                operationSuccess={operationSuccess}
               />
             }
           />
@@ -309,5 +345,3 @@ function App() {
     </CurrentUserContext.Provider>
   );
 }
-
-export default App;

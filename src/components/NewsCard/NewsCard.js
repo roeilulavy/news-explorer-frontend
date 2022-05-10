@@ -1,45 +1,29 @@
 import './NewsCard.css';
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 
-export function NewsCard({ openPage, isLoggedIn, id, cardLink, cardButtonType, cardSpan, cardkeyword, cardImg, cardDate, cardTitle, cardSubtitle, cardCaption, handleSigninPopup, handleSaveArticle, handleDeleteArticle, operationSuccess }) {
+export function NewsCard({ openPage, isLoggedIn, card, id, cardLink, cardSpan, cardkeyword, cardImg, cardDate, cardTitle, cardSubtitle, cardCaption, handleSigninPopup, handleSaveArticle, handleDeleteArticle, operationSuccess, setOperationSuccess, savedCardsData }) {
 
   const button = useRef();
   const text = useRef();
 
-  // const [cardButtonType, setCardButtonType] = useState('');
-  // const [cardSpan, setCardSpan] = useState('');
-
-  // useEffect(() => {
-  //   if (openPage === 'Saved-new') {
-  //     setCardButtonType('Trash');
-  //     setCardSpan('Remove from save');
-  //   }
-
-  //   if (openPage === 'Home') {
-  //     if (isLoggedIn) {
-  //       setCardButtonType('Save');
-  //       setCardSpan('Add to saved');
-  //     } else {
-  //       setCardButtonType('Save');
-  //       setCardSpan('Sign in to save articles');
-  //     }
-  //   }
-  // }, [isLoggedIn, openPage])
-
   function handleButtonClick(e) {
     if (isLoggedIn && openPage === 'Home') {
-      if (e.target.classList.contains(`card__button_type_marked`)) {
-        console.log('Delete save article click')
-        console.log("id: " + id)
-        handleDeleteArticle(id);
-        if (operationSuccess === true) {
-          e.target.classList.toggle(`card__button_type_save`);
-        }
-      } else {
+      if (e.target.classList.contains(`card__button_type_save`)) {
         handleSaveArticle(cardTitle, cardSubtitle, cardDate, cardCaption, cardLink, cardImg);
-        if (operationSuccess === true) {
-          e.target.classList.toggle(`card__button_type_marked`);
-          button.current.classList.toggle('card__button_type_marked')
+
+        if (operationSuccess) {
+          e.target.classList.add(`card__button_type_marked`);
+          e.target.classList.remove(`card__button_type_save`);
+          setOperationSuccess(false);
+        }
+      } else if (e.target.classList.contains(`card__button_type_marked`)) {
+        const articleToDelete = savedCardsData.find((item) => item.text === card.description)
+        handleDeleteArticle(articleToDelete._id);
+
+        if (operationSuccess) {
+          e.target.classList.add(`card__button_type_save`);
+          e.target.classList.remove(`card__button_type_marked`);
+          setOperationSuccess(false);
         }
       }
     }
@@ -57,7 +41,7 @@ export function NewsCard({ openPage, isLoggedIn, id, cardLink, cardButtonType, c
     <article className='card'>
       <button
         ref={button}
-        className={`card__button ${isLoggedIn ? 'card__button_type_save' : 'card__button_type_save_disabled'} ${openPage === 'Saved-news' && 'card__button_type_trash'}`}
+        className={`${isLoggedIn ? 'card__button_type_save' : 'card__button_type_save_disabled'} ${openPage === 'Saved-news' && 'card__button_type_trash'}`}
         type='button'
         onMouseEnter={() => text.current.style.display = 'block'}
         onMouseLeave={() => text.current.style.display = 'none'}

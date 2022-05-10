@@ -61,7 +61,7 @@
 
 .card__button_type_marked:hover {
   background-image: url('../../images/buttons/save_btn_marked.svg');
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
 .card__button_type_trash {
