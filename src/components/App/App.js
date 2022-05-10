@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Routes, Route, Navigate } from "react-router-dom";
 import uuid from 'react-uuid';
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { Main } from "../Main/Main";
 import { SavedNews } from "../SavedNews/SavedNews";
 import { Footer } from "../Footer/Footer";
@@ -55,104 +56,76 @@ export default function App() {
     if (jwt) {
       auth.checkToken(jwt).then((res) => {
           if (res) {
-            async function getUserData() {
-              try {
-                const userInfo = await auth.getUserData(token);
-      
-                if (userInfo) {
-                  setCurrentUser(userInfo);
-                }
-              } catch (error) {
-                console.error("Error! ", error);
-                alert("Something went wrong getting user data..");
-              } 
-            }
-
-            async function getSavedArticles() {
-              try {
-                const savedArticles = await auth.getSavedArticles(token);
-      
-                if (savedArticles) {
-                  setSavedCardsData(savedArticles);
-                }
-              } catch (err) {
-                console.error(err);
-              }
-            }
-
-            getUserData();
-            getSavedArticles();
+            // setCurrentUser(res);
             setIsLoggedIn(true);
           }
         }).catch((err) => console.error(err));
-    }
+    } 
     else {
-      console.log('There is no JWT');
+      console.log('There is no JWT')
+    }
+  },[]);
+
+  React.useEffect(() => {
+    if (isLoggedIn) {
+      async function getUserData() {
+        try {
+          const userInfo = await auth.getUserData(token);
+
+          if (userInfo) {
+            setCurrentUser(userInfo);
+          }
+        } catch (error) {
+          console.error("Error! ", error);
+          alert("Something went wrong getting user data..");
+        } 
+      }
+
+      async function getSavedArticles() {
+        try {
+          const savedArticles = await auth.getSavedArticles(token);
+
+          if (savedArticles) {
+            setSavedCardsData(savedArticles);
+          }
+        } catch (err) {
+          console.error(err);
+        }
+      }
+
+      getUserData();
+      getSavedArticles();
+
+    } else {
       navigation("/");
     }
-  },[navigation, token]);
+  }, [isLoggedIn, navigation, token]);
 
-  // React.useEffect(() => {
-  //   if (isLoggedIn) {
-  //     async function getUserData() {
-  //       try {
-  //         const userInfo = await auth.getUserData(token);
-
-  //         if (userInfo) {
-  //           setCurrentUser(userInfo);
-  //         }
-  //       } catch (error) {
-  //         console.error("Error! ", error);
-  //         alert("Something went wrong getting user data..");
-  //       } 
-  //     }
-
-  //     async function getSavedArticles() {
-  //       try {
-  //         const savedArticles = await auth.getSavedArticles(token);
-
-  //         if (savedArticles) {
-  //           setSavedCardsData(savedArticles);
-  //         }
-  //       } catch (err) {
-  //         console.error(err);
-  //       }
-  //     }
-
-  //     getUserData();
-  //     getSavedArticles();
-
-  //   } else {
-  //     navigation("/");
-  //   }
-  // }, [isLoggedIn, navigation, token]);
-
-  //On savedCardsData Change
-  
-  useEffect(() => {
-    console.log(savedCardsData)
-  },[savedCardsData])
-
-  //Reset SearchForm
+  //Reset
   React.useEffect(() => {
     setSearchKeyword('');
     setIsSearchResultOpen(false);
     setCardsToDisplay(3);
   }, [openPage]);
 
-  const onSignUp = (email, password, username) => {
+  
+  useEffect(() => {
+    console.log(savedCardsData)
+  },[savedCardsData])
+
+  async function onSignUp(email, password, username) {
     auth.signup(email, password, username).then(() => {
-        setIsSignUpPopup(false);
-        setIsSuccessPopup(true);
-      })
+      setIsSignUpPopup(false);
+      setIsSuccessPopup(true);
+    })
       .catch((err) => {
         console.error(err);
         setIsSignUpPopup(false);
         setIsFailurePopup(true);
       });
-  };
+  }
 
-  const onLogin = (email, password) => {
+  async function onLogin(email, password) {
     auth.signin(email, password).then((data) => {      
         if (data) {
           const userData = {
@@ -245,12 +218,12 @@ export default function App() {
       const savedArticle = await auth.saveArticle(searchKeyword, title, subtitle, date, source, link, image, token);
 
       if(savedArticle) {
-        setSavedCardsData([savedArticle, ...savedCardsData]);
+        setSavedCardsData([savedArticle, ...savedCardsData])
         setOperationSuccess(true);
       }
     } catch (err) {
-      alert('something went wrong while save the article');
-      console.log(err);
+      alert('something went wrong while save the article')
+      console.log(err)
     }
   }
 
@@ -327,7 +300,8 @@ export default function App() {
           <Route
             path="/saved-news"
             element={
-              <SavedNews
+              <ProtectedRoute
+                component={SavedNews}
                 isLoggedIn={isLoggedIn}
                 handleLogout={onLogout}
                 openPage={openPage}

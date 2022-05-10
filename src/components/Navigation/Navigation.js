@@ -8,7 +8,7 @@ import MenuIconWhite from '../../images/buttons/menu_white_icon.svg';
 import MenuIconBlack from '../../images/buttons/menu_black_icon.svg';
 import CloseIconWhite from '../../images/buttons/close_white_icon.svg';
 
-export function Navigation ({ isLoggedIn, openPage, setOpenPage, handleLogout, handleSigninPopup }) {
+export function Navigation ({ isLoggedIn, openPage, handleLogout, handleSigninPopup }) {
 
   const currentUser = useContext(CurrentUserContext);
   const navigation = useNavigate();
@@ -26,13 +26,11 @@ export function Navigation ({ isLoggedIn, openPage, setOpenPage, handleLogout, h
 
   function handleHomeBtn() {
     setIsMenuOpen(false);
-    setOpenPage('Home');
     navigation('/');
   }
 
   function handleSavedArticlesBtn() {
     setIsMenuOpen(false);
-    setOpenPage('Saved-news');
     navigation('/saved-news');
   }
 
