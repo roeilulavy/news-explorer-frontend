@@ -52,66 +52,64 @@ export default function App() {
 
   //Get JWT
   React.useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      auth.checkToken(jwt).then((res) => {
-          if (res) {
-            // setCurrentUser(res);
-            setIsLoggedIn(true);
-          }
-        }).catch((err) => console.error(err));
-    } 
-    else {
-      console.log('There is no JWT')
+    if (!token) {
+      console.log('token not valid')
+      return;
     }
-  },[]);
+    
+    async function checkTokenValidity() {
+      try {
+        const checkToken = await auth.checkToken(token);
 
-  React.useEffect(() => {
-    if (isLoggedIn) {
-      async function getUserData() {
-        try {
-          const userInfo = await auth.getUserData(token);
-
-          if (userInfo) {
-            setCurrentUser(userInfo);
-          }
-        } catch (error) {
-          console.error("Error! ", error);
-          alert("Something went wrong getting user data..");
-        } 
-      }
-
-      async function getSavedArticles() {
-        try {
-          const savedArticles = await auth.getSavedArticles(token);
-
-          if (savedArticles) {
-            setSavedCardsData(savedArticles);
-          }
-        } catch (err) {
-          console.error(err);
+        if (checkToken) {
+          setCurrentUser(checkToken);
+          console.log(checkToken)
+          setIsLoggedIn(true);
         }
+      } catch (err) {
+        console.error(err);
+        setIsLoggedIn(false);
+        setCurrentUser({});
+        localStorage.removeItem('jwt');
       }
-
-      getUserData();
-      getSavedArticles();
-
-    } else {
-      navigation("/");
     }
-  }, [isLoggedIn, navigation, token]);
 
-  //Reset
+    checkTokenValidity();
+  },[token]);
+
+  //Get User savedArticles
+  React.useEffect(() => {
+    if (!isLoggedIn) {
+      return;
+    }
+
+    async function getSavedArticles() {
+      try {
+        const savedArticles = await auth.getSavedArticles(token);
+
+        if (savedArticles) {
+          setSavedCardsData(savedArticles);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    getSavedArticles();
+    
+  }, [isLoggedIn, token]);
+
+  //Reset SearchForm
   React.useEffect(() => {
     setSearchKeyword('');
     setIsSearchResultOpen(false);
     setCardsToDisplay(3);
   }, [openPage]);
-
   
+  //Console.log savedCardsData
   useEffect(() => {
     console.log(savedCardsData)
-  },[savedCardsData])
+  },[savedCardsData]);
 
   async function onSignUp(email, password, username) {
     auth.signup(email, password, username).then(() => {
@@ -123,7 +121,7 @@ export default function App() {
         setIsSignUpPopup(false);
         setIsFailurePopup(true);
       });
-  }
+  };
 
   async function onLogin(email, password) {
     auth.signin(email, password).then((data) => {      
@@ -132,6 +130,7 @@ export default function App() {
             email: email,
             token: data,
           };
+          
           setCurrentUser(userData);
           setIsLoggedIn(true);
           setIsSignInPopup(false);
@@ -190,7 +189,7 @@ export default function App() {
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
   const showMore = () => {
     setCardsToDisplay((prevValue) => prevValue + 3);
@@ -199,19 +198,19 @@ export default function App() {
   function handleSigninPopup() {
     closeAllPopups();
     setIsSignInPopup(true);
-  }
+  };
 
   function handleSignupPopup() {
     closeAllPopups();
     setIsSignUpPopup(true);
-  }
+  };
 
   function closeAllPopups() {
     setIsSignInPopup(false);
     setIsSignUpPopup(false);
     setIsSuccessPopup(false);
     setIsFailurePopup(false);
-  }
+  };
 
   async function handleSaveArticle(title, subtitle, date, source, link, image) {
     try {
@@ -225,7 +224,7 @@ export default function App() {
       alert('something went wrong while save the article')
       console.log(err)
     }
-  }
+  };
 
   async function handleDeleteArticle(cardId) {
     try {
@@ -239,7 +238,7 @@ export default function App() {
     } catch (err) {
       console.error(err);
     }
-  }
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

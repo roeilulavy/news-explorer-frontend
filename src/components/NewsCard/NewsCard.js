@@ -12,8 +12,8 @@ export function NewsCard({ openPage, isLoggedIn, card, id, cardLink, cardSpan, c
         handleSaveArticle(cardTitle, cardSubtitle, cardDate, cardCaption, cardLink, cardImg);
 
         if (operationSuccess) {
-          e.target.classList.add(`card__button_type_marked`);
-          e.target.classList.remove(`card__button_type_save`);
+          button.current.classList.add(`card__button_type_marked`);
+          button.current.classList.remove(`card__button_type_save`);
           setOperationSuccess(false);
         }
       } else if (e.target.classList.contains(`card__button_type_marked`)) {
@@ -21,8 +21,8 @@ export function NewsCard({ openPage, isLoggedIn, card, id, cardLink, cardSpan, c
         handleDeleteArticle(articleToDelete._id);
 
         if (operationSuccess) {
-          e.target.classList.add(`card__button_type_save`);
-          e.target.classList.remove(`card__button_type_marked`);
+          button.current.classList.add(`card__button_type_save`);
+          button.current.classList.remove(`card__button_type_marked`);
           setOperationSuccess(false);
         }
       }
