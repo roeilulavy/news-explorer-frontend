@@ -39,27 +39,28 @@ export function NewsCard({ openPage, isLoggedIn, card, id, cardLink, cardkeyword
   }
 
   function handleButtonClick(e) {
-    if (isLoggedIn && openPage === 'Home') {
-      if (e.target.classList.contains(`card__button_type_save`)) {
-        handleSaveArticle(cardTitle, cardSubtitle, cardDate, cardCaption, cardLink, cardImg);
+    if (isLoggedIn && openPage === 'Home' && !e.target.classList.contains(`card__button_type_marked`)) {
 
-        if (operationSuccess) {
-          setIsCardSaved(!isCardSaved);
-          e.target.classList.toggle(`card__button_type_marked`);
-          button.current.classList.remove(`card__button_type_save`);
-          setOperationSuccess(false);
-        }
-      } else if (e.target.classList.contains(`card__button_type_marked`)) {
-        const articleToDelete = savedCardsData.find((item) => item.link === cardLink)
-        handleDeleteArticle(articleToDelete._id);
+      handleSaveArticle(cardTitle, cardSubtitle, cardDate, cardCaption, cardLink, cardImg);
 
-        if (operationSuccess) {
-          setIsCardSaved(!isCardSaved);
-          e.target.classList.toggle(`card__button_type_save`);
-          button.current.classList.remove(`card__button_type_marked`);
-          button.current.classList.add(`card__button_type_save`);
-          setOperationSuccess(false);
-        }
+      if (operationSuccess) {
+        setIsCardSaved(!isCardSaved);
+        e.target.classList.toggle(`card__button_type_marked`);
+        button.current.classList.remove(`card__button_type_save`);
+        setOperationSuccess(false);
+      }
+    }
+    
+    else if (e.target.classList.contains(`card__button_type_marked`)) {
+      const articleToDelete = savedCardsData.find((item) => item.link === cardLink);
+      handleDeleteArticle(articleToDelete._id);
+
+      if (operationSuccess) {
+        setIsCardSaved(!isCardSaved);
+        e.target.classList.toggle(`card__button_type_marked`);
+        button.current.classList.add(`card__button_type_save`);
+        button.current.classList.remove(`card__button_type_marked`);
+        setOperationSuccess(false);
       }
     }
 
