@@ -34,6 +34,8 @@ export function SignUpPopup({ isOpen, onClose, onSignUp, handleSigninPopup }) {
       onSubmit={handleSubmit}
       handlePopup={handleSigninPopup}
       linkText="Sign in"
+      resetForm={resetForm}
+      isValid={isValid}
     >
 
       <label className='popup__label' htmlFor='email'>Email</label>
