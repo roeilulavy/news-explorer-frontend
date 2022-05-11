@@ -40,17 +40,6 @@ export default function App() {
 
   const navigation = useNavigate();
 
-  //Close by Esc
-  React.useEffect(() => {
-    const closeByEscape = (e) => {
-      if (e.key === "Escape") {
-        closeAllPopups();
-      }
-    };
-    document.addEventListener("keydown", closeByEscape);
-    return () => document.removeEventListener("keydown", closeByEscape);
-  }, []);
-
   //Get JWT
   React.useEffect(() => {
     if (!token) {

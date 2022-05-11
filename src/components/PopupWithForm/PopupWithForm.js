@@ -1,8 +1,29 @@
+import { useEffect } from 'react';
 import './PopupWithForm.css';
 
 export function PopupWithForm(props) {
+
+  useEffect(() => {
+
+    if (!props.isOpen) return;
+
+    const closeByEscape = (e) => {
+      if (e.key === 'Escape') {
+        props.onClose();
+      }
+    }
+    document.addEventListener('keydown', closeByEscape);
+    return () => document.removeEventListener('keydown', closeByEscape);
+  }, [props]);
+
+  const handleOverlay = (e) => {
+    if (e.target === e.currentTarget) {
+      props.onClose();
+    };
+  };
+
   return (
-    <div className={`popup popup_type_${props.name} ${props.isOpen && 'popup_is-open'}`}>
+    <div onClick={(e) => handleOverlay(e)} className={`popup popup_type_${props.name} ${props.isOpen && 'popup_is-open'}`}>
       <div className="popup__content">
         <button type="button" className="popup__close" onClick={props.onClose}></button>
         <h3 className="popup__title">{props.title}</h3>
