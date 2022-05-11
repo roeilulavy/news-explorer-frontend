@@ -1,11 +1,14 @@
 import './SignUpPopup.css';
 import React, { useState, useEffect } from "react";
 import { PopupWithForm } from "../PopupWithForm/PopupWithForm";
+import { useForm } from '../../formHooks/useForm';
 
 export function SignUpPopup({ isOpen, onClose, onSignUp, handleSigninPopup }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+
+  const { handleChange, values, isValid, errors, resetForm } = useForm();
 
   useEffect(() => {
     setEmail("");
