@@ -36,6 +36,7 @@ export default function App() {
   const [cardsToDisplay, setCardsToDisplay] = useState(3);
   const [savedCardsData, setSavedCardsData] = useState([]);
   const [operationSuccess, setOperationSuccess] = useState(false);
+  const [isCardSaved, setIsCardSaved] = useState(false)
 
   const navigation = useNavigate();
 
@@ -63,7 +64,6 @@ export default function App() {
 
         if (checkToken) {
           setCurrentUser(checkToken);
-          console.log(checkToken)
           setIsLoggedIn(true);
         }
       } catch (err) {
@@ -221,6 +221,7 @@ export default function App() {
         setOperationSuccess(true);
       }
     } catch (err) {
+      setOperationSuccess(false);
       alert('something went wrong while save the article')
       console.log(err)
     }
@@ -266,6 +267,8 @@ export default function App() {
                   handleDeleteArticle={handleDeleteArticle}
                   operationSuccess={operationSuccess}
                   setOperationSuccess={setOperationSuccess}
+                  isCardSaved={isCardSaved}
+                  setIsCardSaved={setIsCardSaved}
                 />
 
                 <SignInPopup

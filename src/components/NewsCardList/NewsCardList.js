@@ -4,7 +4,7 @@ import { NewsCard } from '../NewsCard/NewsCard'
 import { NotFound } from '../NotFound/NotFound'
 import { handelFormat } from '../../utils/constants';
 
-export function NewsCardList({ isLoggedIn, openPage, isLoading, allArticlesData, cardsToDisplay, savedCardsData, showMore, searchError, handleSigninPopup, handleSaveArticle, handleDeleteArticle, operationSuccess, setOperationSuccess }) {
+export function NewsCardList({ isLoggedIn, openPage, isLoading, allArticlesData, cardsToDisplay, savedCardsData, showMore, searchError, handleSigninPopup, handleSaveArticle, handleDeleteArticle, operationSuccess, setOperationSuccess, isCardSaved, setIsCardSaved }) {
 
   return (
     <section className='cards'>
@@ -20,7 +20,6 @@ export function NewsCardList({ isLoggedIn, openPage, isLoading, allArticlesData,
                       <NewsCard
                         isLoggedIn={isLoggedIn}
                         openPage={openPage}
-
                         card={card}
                         id={card._id}
                         key={index}
@@ -30,15 +29,14 @@ export function NewsCardList({ isLoggedIn, openPage, isLoading, allArticlesData,
                         cardSubtitle={card.description}
                         cardCaption={card.source.name}
                         cardLink={card.url}
-
-                        cardSpan={isLoggedIn ? 'Add to saved' : 'Sign in to save articles'}
-
                         handleSigninPopup={handleSigninPopup}
                         handleSaveArticle={handleSaveArticle}
                         handleDeleteArticle={handleDeleteArticle}
                         operationSuccess={operationSuccess}
                         setOperationSuccess={setOperationSuccess}
                         savedCardsData={savedCardsData}
+                        isCardSaved={isCardSaved}
+                        setIsCardSaved={setIsCardSaved}
                         />
                     )
                   })}
@@ -67,9 +65,6 @@ export function NewsCardList({ isLoggedIn, openPage, isLoading, allArticlesData,
                     cardCaption={card.source}
                     cardLink={card.link}
                     cardkeyword={card.keyword}
-
-                    cardSpan={'Remove from save'}
-
                     handleDeleteArticle={handleDeleteArticle}
                     operationSuccess={operationSuccess}
                     />
