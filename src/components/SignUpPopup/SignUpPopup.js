@@ -55,7 +55,7 @@ export function SignUpPopup({ isOpen, onClose, onSignUp, handleSigninPopup }) {
 
       <span
         id="input_type_name-error"
-        className="popup__error"
+        className="popup__error_visible"
       >
         {errors.email ? errors.email : ""}
       </span>
@@ -104,7 +104,12 @@ export function SignUpPopup({ isOpen, onClose, onSignUp, handleSigninPopup }) {
         required
       />
 
-      <span id="input_type_name-error" className="popup__error">This email is not available</span>
+      <span
+        id="input_type_name-error"
+        className="popup__error_visible"
+      >
+        {errors.username ? errors.username : ""}
+      </span>
 
     </PopupWithForm>
   );
