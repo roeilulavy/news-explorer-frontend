@@ -43,7 +43,6 @@ export default function App() {
   //Get JWT
   React.useEffect(() => {
     if (!token) {
-      console.log('token not valid')
       return;
     }
     
@@ -94,11 +93,6 @@ export default function App() {
     setIsSearchResultOpen(false);
     setCardsToDisplay(3);
   }, [openPage]);
-  
-  //Console.log savedCardsData
-  useEffect(() => {
-    console.log(savedCardsData)
-  },[savedCardsData]);
 
   async function onSignUp(email, password, username) {
     auth.signup(email, password, username).then(() => {
