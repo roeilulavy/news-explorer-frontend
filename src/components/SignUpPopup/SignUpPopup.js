@@ -1,20 +1,19 @@
 import './SignUpPopup.css';
 import React, { useState, useEffect } from "react";
-import { PopupWithForm } from "../PopupWithForm/PopupWithForm";
 import { useForm } from '../../formHooks/useForm';
+import { PopupWithForm } from "../PopupWithForm/PopupWithForm";
 
 export function SignUpPopup({ isOpen, onClose, onSignUp, handleSigninPopup }) {
+  
+  const { handleChange, values, isValid, errors, resetForm } = useForm();
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
 
-  const { handleChange, values, isValid, errors, resetForm } = useForm();
-
   useEffect(() => {
-    setEmail("");
-    setPassword("");
-    setUsername("");
-  }, [isOpen]);
+    resetForm();
+  }, [isOpen, resetForm]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,9 +31,8 @@ export function SignUpPopup({ isOpen, onClose, onSignUp, handleSigninPopup }) {
       title="Sign up"
       buttonText="Sign up"
       onSubmit={handleSubmit}
-      handlePopup={handleSigninPopup}
       linkText="Sign in"
-      resetForm={resetForm}
+      handlePopup={handleSigninPopup}
       isValid={isValid}
     >
 
@@ -42,46 +40,68 @@ export function SignUpPopup({ isOpen, onClose, onSignUp, handleSigninPopup }) {
 
       <input
         className="popup__input"
-        required
-        autoComplete="email"
         id="signup-email"
         name="email"
         type="email"
+        autoComplete="email"
         placeholder="Enter email"
-        value={email || ''}
-        onChange={(e) => setEmail(e.target.value)}
+        value={values.email || ''}
+        onChange={(e) => {
+          setEmail(e.target.value);
+          handleChange(e);
+        }}
+        required
       />
 
-      <span id="input_type_name-error" className="popup__error">Invalid email address</span>
+      <span
+        id="input_type_name-error"
+        className="popup__error"
+      >
+        {errors.email ? errors.email : ""}
+      </span>
 
 
       <label className='popup__label' htmlFor='password'>password</label>
 
       <input
         className="popup__input"
-        required
-        minLength={6}
         id="signup-password"
         name="password"
         type="password"
+        autoComplete='off'
         placeholder="Enter password"
-        value={password || ''}
-        onChange={(e) => setPassword(e.target.value)}
+        value={values.password || ''}
+        minLength={6}
+        onChange={(e) => {
+          setPassword(e.target.value);
+          handleChange(e);
+        }}
+        required
       />
+
+      <span 
+        id="input_type_password-error"
+        className="popup__error_visible"
+      >
+        {errors.password ? errors.password : ""}
+      </span>
 
       <label className='popup__label' htmlFor='username'>Username</label>
 
       <input
         className="popup__input"
-        required
-        minLength={2}
         id="signup-username"
         name="username"
         type="text"
-        placeholder="Enter your Username"
         autoComplete='off'
-        value={username || ''}
-        onChange={(e) => setUsername(e.target.value)}
+        placeholder="Enter your Username"
+        value={values.username || ''}
+        minLength={2}
+        onChange={(e) => {
+          setUsername(e.target.value);
+          handleChange(e);
+        }}
+        required
       />
 
       <span id="input_type_name-error" className="popup__error">This email is not available</span>

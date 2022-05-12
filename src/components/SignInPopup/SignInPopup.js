@@ -11,9 +11,8 @@ export function SignInPopup({ isOpen, onClose, onSignIn, handleSignupPopup }) {
   const [password, setPassword] = useState("");
 
   useEffect(() => {
-    setEmail("");
-    setPassword("");
-  }, [isOpen]);
+    resetForm();
+  }, [isOpen, resetForm]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,7 +32,6 @@ export function SignInPopup({ isOpen, onClose, onSignIn, handleSignupPopup }) {
       onSubmit={handleSubmit}
       linkText="Sign up"
       handlePopup={handleSignupPopup}
-      resetForm={resetForm}
       isValid={isValid}
     >
 
@@ -56,7 +54,7 @@ export function SignInPopup({ isOpen, onClose, onSignIn, handleSignupPopup }) {
 
       <span 
         id="input_type_email-error"
-        className="popup__error"
+        className="popup__error_visible"
       >
         {errors.email ? errors.email : ""}
       </span>
@@ -82,7 +80,7 @@ export function SignInPopup({ isOpen, onClose, onSignIn, handleSignupPopup }) {
 
       <span 
         id="input_type_password-error"
-        className="popup__error"
+        className="popup__error_visible"
       >
         {errors.password ? errors.password : ""}
       </span>
