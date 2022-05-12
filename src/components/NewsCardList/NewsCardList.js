@@ -2,67 +2,80 @@ import './NewsCardList.css'
 import { PreLoader } from '../PreLoader/PreLoader'
 import { NewsCard } from '../NewsCard/NewsCard'
 import { NotFound } from '../NotFound/NotFound'
+import { handelFormat } from '../../utils/constants';
 
-export function NewsCardList({ isLoggedIn, openPage, isLoading, cards, cardsToDisplay, savedCardsData, text, showMore }) {
+export function NewsCardList({ isLoggedIn, openPage, isLoading, allArticlesData, cardsToDisplay, savedCardsData, showMore, searchError, handleSigninPopup, handleSaveArticle, handleDeleteArticle, operationSuccess, setOperationSuccess, isCardSaved, setIsCardSaved }) {
 
   return (
     <section className='cards'>
       {isLoading ? 
         <PreLoader />
         :
-          openPage === 'Home' && cards ?
+          openPage === 'Home' && allArticlesData.length !== 0 ?
             <>
               <h2 className='cards__title'>Search Result</h2>
                 <div className='cards__wrapper'>
-                  {cards.slice(0, cardsToDisplay).map((card) => {
+                  {allArticlesData.slice(0, cardsToDisplay).map((card, index) => {
                     return (
                       <NewsCard
+                        isLoggedIn={isLoggedIn}
+                        openPage={openPage}
                         card={card}
-                        key={card.id}
-                        cardButtonType={'save'}
-                        cardSpan={isLoggedIn ? 'Add to saved' : 'Sign in to save articles'}
-                        cardImg={card.img}
-                        cardDate={card.date}
+                        id={card._id}
+                        key={index}
+                        cardImg={card.urlToImage}
+                        cardDate={handelFormat(card.publishedAt)}
                         cardTitle={card.title}
-                        cardSubtitle={card.subtitle}
-                        cardCaption={card.caption}
-                        cardkeyword={card.keyword} />
+                        cardSubtitle={card.description}
+                        cardCaption={card.source.name}
+                        cardLink={card.url}
+                        handleSigninPopup={handleSigninPopup}
+                        handleSaveArticle={handleSaveArticle}
+                        handleDeleteArticle={handleDeleteArticle}
+                        operationSuccess={operationSuccess}
+                        setOperationSuccess={setOperationSuccess}
+                        savedCardsData={savedCardsData}
+                        isCardSaved={isCardSaved}
+                        setIsCardSaved={setIsCardSaved}
+                        />
                     )
                   })}
                 </div>
                 {
-                  cards.length >= cardsToDisplay &&
+                  allArticlesData.length >= cardsToDisplay &&
                   <button type='button' className='cards__button-show-more' onClick={() => showMore()}>Show more</button> 
                 }
             </>
         :
-          openPage === 'Saved-news' && savedCardsData ?
+          openPage === 'Saved-news' && savedCardsData.length !== 0 ?
             <div className='cards__wrapper'>
-              {savedCardsData.map((card) => {
+              {savedCardsData.map((card, index) => {
                 return (
                   <NewsCard
+                    isLoggedIn={isLoggedIn}
                     openPage={openPage}
+
                     card={card}
-                    key={card.id}
-                    cardButtonType={'trash'}
-                    cardSpan={'Remove from save'}
-                    cardImg={card.img}
+                    id={card._id}
+                    key={index}
+                    cardImg={card.image}
                     cardDate={card.date}
                     cardTitle={card.title}
-                    cardSubtitle={card.subtitle}
-                    cardCaption={card.caption}
-                    cardkeyword={card.keyword} />
+                    cardSubtitle={card.text}
+                    cardCaption={card.source}
+                    cardLink={card.link}
+                    cardkeyword={card.keyword}
+                    handleDeleteArticle={handleDeleteArticle}
+                    operationSuccess={operationSuccess}
+                    />
                 )
               })}
             </div>
         :
         <>
           <NotFound
-            text={text}
-          />
-          
-          {console.log('openPage: '+openPage + ' || Saved Cards Data'+savedCardsData)}
-          
+            text={openPage === 'Home' ? searchError === true ? 'Sorry, something went wrong during the request. There may be a connection issue or the server may be down. Please try again later.' : 'Sorry, but nothing matched your search terms.' : openPage === 'Saved-news' && 'You don`t have any saved articles yet.'}
+          />          
         </>
       }
     </section>

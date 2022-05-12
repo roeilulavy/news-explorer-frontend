@@ -1,9 +1,13 @@
 .card {
-  max-width: 400px;
+  max-width: 345px;
   background-color: white;
   border-radius: 20px;
   cursor: pointer;
   position: relative;
+}
+
+.card__link {
+  text-decoration: none;
 }
 
 .card__button_type_save {
@@ -25,11 +29,22 @@
   background-image: url('../../images/buttons/save_btn_hover.svg');
 }
 
-.card__button_type_save:active {
-  background-image: url('../../images/buttons/save_btn_marked.svg');
+.card__button_type_save_disabled {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  border-radius: 8px;
+  top: 24px;
+  right: 24px;
+  border: none;
+  background-image: url('../../images/buttons/save_btn_normal.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  background-color: white;
 }
 
-.card__button_type_save-marked {
+.card__button_type_marked {
   position: absolute;
   height: 40px;
   width: 40px;
@@ -42,6 +57,11 @@
   background-position: center;
   cursor: pointer;
   background-color: white;
+}
+
+.card__button_type_marked:hover {
+  background-image: url('../../images/buttons/save_btn_marked.svg');
+  opacity: 0.8;
 }
 
 .card__button_type_trash {

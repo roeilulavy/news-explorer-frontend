@@ -95,6 +95,7 @@
   color: #B6BCBF;
   background-color: #E6E8EB;
   border-radius: 100px;
+  user-select: none;
 }
 
 .popup__span {

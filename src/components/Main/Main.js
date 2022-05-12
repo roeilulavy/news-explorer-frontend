@@ -1,9 +1,9 @@
+import React from "react";
 import { Header } from "../Header/Header";
 import { About } from "../About/About";
 import { NewsCardList } from "../NewsCardList/NewsCardList";
-import React from "react";
 
-export function Main({ isLoggedIn, handleLogout, setOpenPage, onSearch, cards, cardsToDisplay, savedCardsData, showMore, isSearchResultOpen, isLoading, handleSigninPopup }) {
+export function Main({ isLoggedIn, handleLogout, setOpenPage, onSearch, allArticlesData, cardsToDisplay, savedCardsData, showMore, isSearchResultOpen, isLoading, handleSigninPopup, searchError, handleSaveArticle, handleDeleteArticle, operationSuccess, setOperationSuccess, isCardSaved, setIsCardSaved }) {
 
   React.useEffect(() => {
     setOpenPage('Home')
@@ -25,11 +25,18 @@ export function Main({ isLoggedIn, handleLogout, setOpenPage, onSearch, cards, c
           isLoggedIn={isLoggedIn}
           openPage={'Home'}
           isLoading={isLoading}
-          cards={cards}
+          allArticlesData={allArticlesData}
           cardsToDisplay={cardsToDisplay}
           savedCardsData={savedCardsData}
           showMore={showMore}
-          text={'Sorry, but nothing matched your search terms.'}
+          searchError={searchError}
+          handleSigninPopup={handleSigninPopup}
+          handleSaveArticle={handleSaveArticle}
+          handleDeleteArticle={handleDeleteArticle}
+          operationSuccess={operationSuccess}
+          setOperationSuccess={setOperationSuccess}
+          isCardSaved={isCardSaved}
+          setIsCardSaved={setIsCardSaved}
         />}
 
       <About />

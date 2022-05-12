@@ -3,14 +3,13 @@ import { Navigation } from '../Navigation/Navigation'
 import { SearchForm } from '../SerchForm/SearchForm'
 
 
-export function Header({ isLoggedIn, handleLogout, openPage, setOpenPage, onSearch, handleSigninPopup }) {
+export function Header({ isLoggedIn, handleLogout, openPage, onSearch, handleSigninPopup }) {
 
   return (
     <header className='header'>
       <Navigation
         isLoggedIn={isLoggedIn}
         openPage={openPage}
-        setOpenPage={setOpenPage}
         handleLogout={handleLogout}
         handleSigninPopup={handleSigninPopup}
       />
