@@ -31,7 +31,7 @@ __________________________________________
 
 ____________________________________________
 
-<!-- You can try it [here](https://news-searcher.students.nomoreparties.sbs). -->
+You can try it [here](https://https://www.roy.news.students.nomoreparties.sbs/).
 
 
 BackEnd code is [here](https://github.com/roeilulavy/news-explorer-api).

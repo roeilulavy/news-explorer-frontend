@@ -19,7 +19,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deployssh": "npm run build && scp -r -i ~/.ssh/id_rsa ./build/* roei19931@10.182.0.2:/home/roy_lulavy/frontend"
+    "deployssh": "npm run build && scp -r -i ~/.ssh/id_ed25519 ./build/* roy_lulavy@roy.news.students.nomoreparties.sbs:/home/roy_lulavy/frontend"
   },
   "eslintConfig": {
     "extends": [
