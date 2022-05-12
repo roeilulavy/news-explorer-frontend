@@ -1,7 +1,7 @@
 
 const API_KEY = '36f3ba6eab1248458532031a692e7f8b';
-const BASE_URL = 'https://newsapi.org/v2/everything';
-// const BASE_URL = 'https://nomoreparties.co/news/v2/everything';
+// const BASE_URL = 'https://newsapi.org/v2/everything';
+const BASE_URL = 'https://nomoreparties.co/news/v2/everything';
 
 class NewsApi {
   constructor(baseUrl, apiKey) {
