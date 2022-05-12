@@ -8,36 +8,38 @@ export function SavedNewsHeader({ isLoggedIn, handleLogout, openPage, setOpenPag
   const currentUser = useContext(CurrentUserContext);
   const [keyWordPhrase, setKeyWordPhrase] = useState('');
 
-  useEffect(() => { // algoritm to set the keyword phrase
-    if (!savedCardsData) return
-    const keyWordCounter = {}
+  useEffect(() => {
+    if (!savedCardsData) return;
+
+    const keyWordCounter = {};
+
     savedCardsData.forEach((card) => {
       if (!keyWordCounter[card.keyword]) {
         keyWordCounter[card.keyword] = 1
-      }
-      else {
+      } else {
         keyWordCounter[card.keyword] = keyWordCounter[card.keyword] + 1
-      }
+      };
     });
-    let arrayKeyWords = Object.keys(keyWordCounter).map((item) => {
-      return [item, keyWordCounter[item]]
-    })
 
-    arrayKeyWords.sort((a, b) => b[1] - a[1])
-    arrayKeyWords = arrayKeyWords.flat().filter((item) => typeof (item) === 'string')
+    let arrayKeyWords = Object.keys(keyWordCounter).map((item) => {
+      return [item, keyWordCounter[item]];
+    });
+
+    arrayKeyWords.sort((a, b) => b[1] - a[1]);
+    arrayKeyWords = arrayKeyWords.flat().filter((item) => typeof (item) === 'string');
+
     if (arrayKeyWords.length <= 3) {
-      arrayKeyWords = arrayKeyWords.join(', ')
-      setKeyWordPhrase(arrayKeyWords)
-    }
-    else {
-      const sumOfkeyWord = arrayKeyWords.length
+      arrayKeyWords = arrayKeyWords.join(', ');
+      setKeyWordPhrase(arrayKeyWords);
+    } else {
+      const sumOfkeyWord = arrayKeyWords.length;
       arrayKeyWords = [arrayKeyWords[0], arrayKeyWords[1]];
       arrayKeyWords = arrayKeyWords.join(', ');
-      const phrase = `${arrayKeyWords}, and ${sumOfkeyWord - 2} other`
-      setKeyWordPhrase(phrase)
-    }
+      const phrase = `${arrayKeyWords}, and ${sumOfkeyWord - 2} other`;
 
-  }, [savedCardsData])
+      setKeyWordPhrase(phrase);
+    }
+  }, [savedCardsData]);
 
   return (
     <header className='savedNewsHeader'>
